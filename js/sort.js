@@ -7,7 +7,7 @@ function _sort(a, b) {
     var b = b[0];
     var _a = (a + '').replace(/,/, '.');
     var _b = (b + '').replace(/,/, '.');
-	if (a.charAt(2)=='.' && a.charAt(5)=='.' && b.charAt(2)=='.' && b.charAt(5)=='.') return sort_date(a,b);
+    if (a.charAt(2)=='.' && a.charAt(5)=='.' && b.charAt(2)=='.' && b.charAt(5)=='.') return sort_date(a,b);
     if (parseFloat(_a) && parseFloat(_b)) return sort_numbers(parseFloat(_a), parseFloat(_b));
     else if (!sort_case_sensitive) return sort_insensitive(a, b);
     else return sort_sensitive(a, b);
@@ -24,6 +24,7 @@ function sort_date(data1, data2){
 	//alert(md1+" "+md2);
 	//alert (mdata1-mdate2)
 	//return mdata1-mdate2; 
+        //console.log(md1+" "+md2);
 	return md1-md2;
 }
 

@@ -3,32 +3,114 @@
 //	document.location.href = "main.html"
 //}
 
-function user_click(){
-	//var dialog = document.querySelector('#user_dialog');
-	//dialog.showModal();
-	$( "#user_dialog" ).dialog( "open" );
+function userButtonClick(){
+	$( "#userDialog" ).dialog( "open" );
+}
+
+function adminButtonClick(){
+    $("#adminDialog").dialog("open");
+}
+
+function regionButtonClick(){
+    $("#regionDialog").dialog("open");
+}
+
+function baseButtonClick(){
+    $("#baseDialog").dialog("open");
+}
+
+function validateUserForm(){
+    var valid = true;
+    var userJobs = document.getElementById('userJobs').value;
+    if(userJobs === ""){
+        alert("выберите должность");
+        valid = false;
+    }
+    return valid;
+}
+
+function edit_fild(val){
+	document.getElementById('id_fild').value=val;
+	document.getElementById('hides').submit();
+}
+
+function avtoButtonClick(){
+    document.getElementById('avto_hides').submit();
+}
+
+function recourceButtonClick() {
+	$( "#add_fild" ).dialog( "open" );
+}
+
+function close_fild_click(){
+	window.open("close_fild.php", "_blank");
+}
+
+function locButtonClick(){
+    window.open("local_base.php", "_blank");
+}
+
+function localButtonClick(){
+    $( "#localDialog" ).dialog( "open" );
+}
+
+function localReportClick(){
+    window.open("local_report.php", "_blank");
+}
+
+function localReport2Click(){
+    window.open("local_report_2.php", "_blank");
+}
+
+function JournalReportClick(){
+    window.open("journal_user.php", "_blank");
+}
+
+function certButtonClick(){
+    window.open("cert.php", "_blank");
+}
+
+function certDialogOpen(){
+    $( "#certDialog" ).dialog( "open" );
+}
+
+function popup_alert_click(){
+	$( "#popup_date" ).dialog( "open" );
+}
+
+function reportsButtonClick(){
+        $( '#reportDialog').dialog('open');
 }
 
 function check_select(val){
 	var elem = document.getElementById('request');
-	if (val == 'выгружен на область'){
+	if (val == 'выгружен на область' || val == 'отправлен в МНС'){
 		elem.style.display="block";
 	}else{
 		elem.style.display="none";
 	}
 }
 
-function edit_fild(val){
-	//var http = new XMLHttpRequest();
-	//var url = 'update_fild.php';
-	//var params = 'id_fild='+val;
-	//http.open('POST',url, true);
-	//http.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-	//http.send(params);
-	//alert(val);
-	document.getElementById('id_fild').value=val;
-	document.getElementById('hides').submit();
+function unloaded_obl_click(){
+	window.open("otchetobl.php", "_blank");
 }
+
+function unloaded_click(){
+	//document.location.href = "unloaded.php";
+	window.open("unloaded.php", "_blank");
+}
+
+function check_click() {
+	$( "#check" ).dialog( "open" );
+}
+
+function create_click(){
+	document.getElementById('hidesotchet').submit();
+}
+
+
+
+
 
 //function ok_click_user() {
 //	window.location.reload();
@@ -49,26 +131,11 @@ function go_to_main_click(http) {
 	//history.go(-1);
 }
 
-function unloaded_click(){
-	//document.location.href = "unloaded.php";
-	window.open("unloaded.php", "_blank");
-}
+
 
 function count_click(){
 	//document.location.href = "unloaded.php";
 	window.open("count.php", "_blank");
-}
-
-function unloaded_obl_click(){
-	window.open("otchetobl.php", "_blank");
-}
-
-function unloaded_mns_click(){
-	window.open("otchetmns.php", "_blank");
-}
-
-function popup_alert_click(){
-	$( "#popup_date" ).dialog( "open" );
 }
 
 //function svod_click(){
@@ -87,16 +154,6 @@ function close_fild_click(){
 	window.open("close_fild.php", "_blank");
 }
 
-function fild_click() {
-	//var dialog = document.querySelector('#add_fild');
-	//dialog.showModal();
-	$( "#add_fild" ).dialog( "open" );
-}
-
-function check_click() {
-	$( "#check" ).dialog( "open" );
-}
-
 
 function update_click(){
 	$("#update_user").dialog("open");
@@ -106,10 +163,6 @@ function update_fild_click(){
 	$("#update_fild").dialog("open");
 }
 
-function create_click(){
-	document.getElementById('hides2').submit();
-	//document.getElementById('sub_hides2').onclick();
-}
 //function ok_click_fild() {
 //	window.location.reload();
 //}

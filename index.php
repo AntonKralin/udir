@@ -1,8 +1,9 @@
 <?php
 session_start();
 session_unset();
-include 'connect.php';
-include 'const.php';
+require_once 'otherPHP/const.php';
+require_once 'otherPHP/function.php';
+$bd = new BD();
 ?>
 <html>
 
@@ -18,7 +19,6 @@ include 'const.php';
 		<link rel="stylesheet" href="styles/jquery-ui.theme.min.css" type="text/css" />
 		<script type="text/javascript" src="js/functions.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
-		<script type="text/javascript" src="js/jquery1.js"></script>
 		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	</head>
 
@@ -27,7 +27,7 @@ include 'const.php';
 			<div id="work_index">
 			<!-- <hr> -->
 			<br>
-			<p><h3 style="text-align:center; background:#66cc99; font-size:18pt; padding:1em;">«Учет доступа к информационным ресурсам»</h3></p>
+			<p><h3 style="text-align:center; background:#66cc99; font-size:18pt; padding:1em; font-style: italic;">«Учет доступа к информационным ресурсам» Витебская область</h3></p>
 			<form id="pass" method="post" action="index.php">
 				<p><h2>Авторизуйтесь:</h2></p>
 				Логин:
@@ -40,28 +40,29 @@ include 'const.php';
 				<?php 
 					if (isset($_POST['submit'])){
 						#echo "submit";
-						$query = 'select `id_mns`,`login`,`password`, `access` from `table_admins` where `login` like "'.mysqli_real_escape_string($link, $_POST["login"]).'"';
-						$result = mysqli_query($link,$query) or die(mysqli_error($link));
-						
+                                                $adminsDAO = new AdminsDAO();
+						$admins = $adminsDAO->getAdminByLogin($bd,$_POST["login"]);
 						$data=[];
-						for ($data=[]; $row=mysqli_fetch_assoc($result); $data[]=$row);
-						if (count($data) != 0){	
-							$elem = [];
-							foreach($data as $elem);
-							if ($elem["password"]!=$_POST["password"]){
-								echo "<p>неправильный логин\пароль</p>";
-							}else{
-								#echo "<p>правильный логин\пароль</p>";
-								$_SESSION["id_access"] = $elem["access"];
-								$_SESSION["id_mns"] = $elem["id_mns"];
-								$_SESSION["start"] = "1";
-								header("Location: main.php");
-								exit;
-							}
+						if ($admins->password != $_POST["password"]){
+                                                    echo "<p>неправильный логин\пароль</p>";
 						}else{
-							echo "<p>неправильный логин\пароль</p>";
-						}
-					}				
+                                                    #echo "<p>правильный логин\пароль</p>";
+                                                    $imnsDAO = new ImnsDAO();
+                                                    $imns = $imnsDAO->getImnsById($bd,$admins->id_imns);
+                                                    $imnsList = $imnsDAO->getImnsList($bd, $imns);
+                                                    $regionDAO = new RegionDAO();
+                                                    $region = $regionDAO->getRegionByID($bd,$imns->id_region);
+                                                    
+                                                    
+                                                    $_SESSION["admins"] = serialize($admins);
+                                                    $_SESSION["imns"] = serialize($imns);
+                                                    $_SESSION["imnsList"] = serialize($imnsList);
+                                                    $_SESSION["region"] = serialize($region);
+                                                    $_SESSION["start"] = "1";
+                                                    header("Location: main.php");
+                                                    exit;
+                                                }
+                                        }				
 				?>
 				<br><br><br>
 				

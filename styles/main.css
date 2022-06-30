@@ -8,7 +8,6 @@
 		font-size: 11pt;
 		margin: 0;
 		padding: 0;
-		align: center;
 	}
 
 	#tabs {
@@ -18,10 +17,21 @@
 	}
 
 	.tab {
-		overflow: hidden;
 		border: 1px solid #ccc;
 		background-color: white;
+                height: 45px;
 	}
+        
+        #baseline{
+                width: 100%;
+                display: flex;
+                overflow-x: scroll;
+        }
+        
+        .formbutton{
+                display: flex;
+                margin: 0px;
+        }
 
 	.tab input {
 		background-color: white;
@@ -44,20 +54,66 @@
 		background-color: #ddd;
 	}
 
-	#imns_label {
-		font-size: 10pt;
-		width: 50%;
-		position: absolute;
-	}
+        #top_head {
+                width: 100%;
+                display: inline-block;
+                font-size: 10pt;
+                padding: 0px 0px;
+        }
+        
+        #top_head form {
+                margin-bottom: 0px;
+        }
+        
+        #log_out {
+                font-size: 10pt;
+                text-decoration: none;
+                color: black;
+                font-weight: bold;
+        }
 
-	#log_out {
-		font-size: 10pt;
-		text-decoration: none;
-		text-align: right;
-		position: inherit;
-		color: black;
-		font-weight: bold;
+	#top_right {
+		position: absolute;
+		right: 1%;
+                margin: -5px 0px;
 	}
+        
+        #top_right_name {
+            display: inline;
+        }
+        
+        #top_center {
+                position: absolute;
+                left: 40%;
+                margin: -3px;
+        }
+        
+        #top_left {
+                font-size: 10px;
+                float: left;
+                clear: right;
+                display: flex;
+	}
+        
+        #next_top_head {
+                padding: 0px 0px;
+                display: flex;
+				margin-top: 3px;
+	}
+        
+        #next_top_head form {
+                margin-bottom: 0px;
+        }
+        
+        #top_head_button {
+                float: right;
+                padding: 0px 4px;
+				margin-top: -1px;
+        }
+        
+        #top_head_button button {
+            font-size: 10pt;
+        }
 
 	#header {
 		z-index: 1;
@@ -68,7 +124,17 @@
 	#work {
 		padding: 0 0;
 		margin: 0 auto;
-		height: 87%;
+		height: 93%;
+                width: 99%;
+		background-color: white;
+		overflow: auto;
+	}
+        
+        #work_cert {
+		padding: 0 0;
+		margin: 0 auto;
+		height: 94%;
+                width: 99%;
 		background-color: white;
 		overflow: auto;
 	}
@@ -86,10 +152,6 @@
 		width: 300px;
 	}
 
-	#bottom {
-		padding: 0;
-	}
-
 	.body_div{
 		margin: 40 auto;
 		width: 630px;
@@ -98,37 +160,62 @@
 		border-radius: 15px;
 	}
 	
+	label_info{
+		color:white;
+		font-size: 10pt;
+		font-style: italic;
+	}
+
+        p.vertical{
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+        
+        
 	h2 {
-    background: #66cc99; /* Цвет фона под заголовком */
-    padding: 3px; /* Поля вокруг текста */
+        background: #66cc99; /* Цвет фона под заголовком */
+        padding: 3px; /* Поля вокруг текста */
 	border-radius: 2px;
 	font-size: 14pt;
 	text-align: center;
    }
    
    	h7 {
-    padding: 3px; /* Поля вокруг текста */
+        padding: 3px; /* Поля вокруг текста */
 	border-radius: 2px;
 	font-size: 8pt;
 	font-style: italic;
    }
     
 	h8 {
-    padding: 3px; /* Поля вокруг текста */
+        padding: 3px; /* Поля вокруг текста */
 	border-radius: 2px;
 	font-size: 10pt;
 	font-weight: bold;
    }
 	
 	h9 {
-	background: #66cc99;
-    padding: 1px; /* Поля вокруг текста */
-	border-radius: 2px;
-	font-size: 10pt;
+	text-shadow: 1px 1px #333, 2px 2px #777, 3px 3px #333;
+	color:wheat;
+	font-size: 14pt;
+	transition: all .1s;
 	font-weight: bold;
 	font-style: italic;
    }
-         
+   
+   .ahead {
+	text-shadow: 1px 1px #333, 2px 2px #777, 3px 3px #333;
+	color:wheat;
+	font-size: 14pt;
+	transition: all .1s;
+	font-weight: bold;
+	font-style: italic;
+        text-decoration: none;
+   }
+  
 	.center_div{
 		margin: 40 auto;
 		width: 600px;
@@ -154,7 +241,30 @@
 	table.sortable {
 		border-spacing: 0;
 		margin: auto;
+/*                height: 100%;*/
+                width: 100%;
 	}
+        
+        table.sortable thead {
+            width: 100%;
+            /*display: block;*/ 
+        }
+        
+        table.sortable tbody {
+/*                display: block;
+                overflow: auto;
+                height: 100%;*/
+        }
+        
+        table.sortable tbody tr {
+/*                width: 100%;*/
+        }
+        
+        table.sortable tbody tr, table.sortable thead {
+/*            display: table;
+            table-layout: fixed;*/
+            
+        }
 
 	table.sortable td {
 		border: 1px solid #CCCCCC;
@@ -204,10 +314,31 @@
 	.button:hover {
 		background-color: grey;
 	}
+	.userButtons {
+		border: 0px;
+		background-color: transparent;
+		padding-left: 0px;
+		padding-right: 0px;
+	}
 	
+		
 	button.ui-datepicker-current {
 		display: none;
 	}
+        
+        .avto_div{
+                width: 70%;
+                padding: 0 0;
+		margin: 0 auto;
+                border: 1px solid black;
+		background-color: white;
+		overflow: auto;
+                text-align: center;
+        }
+        
+        .avto_div label{
+            font-weight: bold;
+        }
 }
 
 @media print{
