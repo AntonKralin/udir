@@ -1,0 +1,218 @@
+/* FrontPage */
+
+@media screen {
+	
+	body {
+		background: url("../images/bg.png") repeat;
+		font-family: Tahoma,Arial,sans-serif;
+		font-size: 11pt;
+		margin: 0;
+		padding: 0;
+		align: center;
+	}
+
+	#tabs {
+		padding: 0;
+		margin: 8px auto;
+		width: 98%;
+	}
+
+	.tab {
+		overflow: hidden;
+		border: 1px solid #ccc;
+		background-color: white;
+	}
+
+	.tab input {
+		background-color: white;
+		float: left;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 4px 4px;
+		transition: 0.3s;
+		font-size: 11pt;
+		border-right: 1px solid #CCCCCC;
+		border-bottom: 1px solid #CCCCCC;
+	}
+
+	.tab input:hover {
+		background-color: #ccc;
+	}
+
+	.tab input:active {
+		background-color: #ddd;
+	}
+
+	#imns_label {
+		font-size: 10pt;
+		width: 50%;
+		position: absolute;
+	}
+
+	#log_out {
+		font-size: 10pt;
+		text-decoration: none;
+		text-align: right;
+		position: inherit;
+		color: black;
+		font-weight: bold;
+	}
+
+	#header {
+		z-index: 1;
+		text-align: right;
+		width: inherit;
+	}
+
+	#work {
+		padding: 0 0;
+		margin: 0 auto;
+		height: 87%;
+		background-color: white;
+		overflow: auto;
+	}
+
+	#work_all {
+		padding: 0 0;
+		margin: 0 auto;
+		height: 100%;
+		background-color: white;
+		overflow: auto;
+	}
+
+	#pass {
+		margin: 40 auto;
+		width: 300px;
+	}
+
+	#bottom {
+		padding: 0;
+	}
+
+	.body_div{
+		margin: 40 auto;
+		width: 630px;
+		height: auto;
+		background-color: #e9e9e9;
+		border-radius: 15px;
+	}
+	
+	h2 {
+    background: #66cc99; /* Цвет фона под заголовком */
+    padding: 3px; /* Поля вокруг текста */
+	border-radius: 2px;
+	font-size: 14pt;
+	text-align: center;
+   }
+   
+   	h7 {
+    padding: 3px; /* Поля вокруг текста */
+	border-radius: 2px;
+	font-size: 8pt;
+	font-style: italic;
+   }
+    
+	h8 {
+    padding: 3px; /* Поля вокруг текста */
+	border-radius: 2px;
+	font-size: 10pt;
+	font-weight: bold;
+   }
+	
+	h9 {
+	background: #66cc99;
+    padding: 1px; /* Поля вокруг текста */
+	border-radius: 2px;
+	font-size: 10pt;
+	font-weight: bold;
+	font-style: italic;
+   }
+         
+	.center_div{
+		margin: 40 auto;
+		width: 600px;
+	}
+
+	.center_div button{
+		width: 600px;
+	}
+
+	.user_update_form input{
+		width: 600px;
+	}
+
+	.user_update_form submit{
+		width: 600px;
+	}
+
+	.user_update_form textarea{
+		width: 600px;
+		height: 60px;
+	}
+
+	table.sortable {
+		border-spacing: 0;
+		margin: auto;
+	}
+
+	table.sortable td {
+		border: 1px solid #CCCCCC;
+		padding: 0.3em 3px;
+		font-size: 10pt;
+	}
+
+	table.sortable tr:nth-child(even) {
+		background-color: #EEEEEE;
+	}
+
+	table.sortable th, table.sortable td {
+		border-style: solid;
+		border-width: 0 1px 1px 0;
+		border-color: grey;
+	}
+
+	table.sortable thead td {
+		background-color:C0C0C0;
+		cursor: pointer;
+		cursor: hand;
+		font-weight: bold;
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	table.sortable thead td.cursor {
+		background-color: #999999;
+		color: #FFFFFF;
+	}
+
+	table.sortable tr:nth-child(even) {
+		background-color: #EEEEEE;
+	}
+	
+	.button {
+		background-color: #669999;
+		border-radius: 2px;
+		border: none;
+		color: white;
+		padding: 2px 5px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+	}
+	.button:hover {
+		background-color: grey;
+	}
+	
+	button.ui-datepicker-current {
+		display: none;
+	}
+}
+
+@media print{
+	table.sortable {
+		border-spacing: 0;
+		margin: auto;
+	}
+}

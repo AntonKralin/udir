@@ -1,0 +1,22 @@
+SELECT f.`id_user`, u.`fio` , GROUP_CONCAT(DISTINCT b.`shot_name` ORDER BY f.`id_base` SEPARATOR ',') 
+FROM `table_user` u, `table_fild` f
+JOIN `table_base` b ON f.`id_base` = b.`id`
+WHERE u.`id` = f.`id_user`
+GROUP BY f.`id_user`
+
+
+SELECT f.`id_user`, u.`fio`, u.`ip` , i.`number`, GROUP_CONCAT(DISTINCT b.`shot_name` ORDER BY f.`id_base` SEPARATOR ',') 
+FROM `table_fild` f
+JOIN `table_base` b ON f.`id_base` = b.`id`
+JOIN `table_user` u ON f.`id_user` = u.`id`
+JOIN `table_imns` i ON u.`id_mns` = i.`id`
+WHERE u.`del` != 0
+GROUP BY f.`id_user`
+
+SELECT f.`id_user`, u.`fio`, u.`ip` , i.`number`, GROUP_CONCAT(DISTINCT b.`shot_name` ORDER BY f.`id_base` SEPARATOR ',') 
+FROM `table_fild` f
+JOIN `table_base` b ON f.`id_base` = b.`id`
+JOIN `table_user` u ON f.`id_user` = u.`id`
+JOIN `table_imns` i ON u.`id_mns` = i.`id`
+WHERE u.`del` != 0 AND f.`state` != 'прекращен'
+GROUP BY f.`id_user`

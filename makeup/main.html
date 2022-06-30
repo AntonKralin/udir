@@ -1,0 +1,201 @@
+
+<html>
+
+	<head>
+		<title>Сайт удаленных ресурсов</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Сайт удаленных ресурсов" />
+		<meta name="keywords" content="Сайт удаленных ресурсов" />
+		<link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		<link rel="stylesheet" href="styles/main.css" type="text/css" />
+		<link rel="stylesheet" href="styles/jquery-ui.min.css" type="text/css" />
+		<link rel="stylesheet" href="styles/jquery-ui.structure.min.css" type="text/css" />
+		<link rel="stylesheet" href="styles/jquery-ui.theme.min.css" type="text/css" />		
+	
+	</head>
+
+	<body>
+		
+		<div id="imns_label">
+			<select id="selectmenu">
+				<option>1</option>
+				<option>2</option>
+				<option selected="selected">имнс300 вит обл</option>
+				<option>3</option>
+				<option>4</option>
+			</select>
+		</div>
+		
+		<div id="log_out">
+			<a href="index.html" id="log_out">Выйти</a>
+		</div>
+			
+		</div>
+		<div id="tabs">
+			<div id="color2"> 
+					<ul>
+						<li><a href="#work">BD1</a></li>
+						<li><a href="#work">BD2</a></li>
+						<li><a href="#work">BD3</a></li>
+					</ul>
+			</div>
+			
+			<div id="work">
+				
+				<table border="1" width="100%" cellpadding="1" cols="11" class="sortable" >
+				
+				<thead>
+					<tr>
+						<td width="13%" >ФИО</td>
+						<td width="15%">Должность</td>
+						<td width="4%">Телефон</td>
+						<td width="5%">IP</td>
+						<td width="10%">Имя компьютера</td>
+						<td width="7%">Логин AD</td>
+						<td width="7%">Логин БД</td>
+						<td width="8%">Действует С</td>
+						<td width="8%">Действует ПО</td>
+						<td width="8%">Выгружен</td>
+						<td width="8%">Продление</td>
+						<td width="4%">Статус</td>
+						<td >Примечание</td>
+					</tr>
+				</thead>
+				<tbody>	
+					<tr>
+						<td>Голованова Руслана Олеговна</td>
+						<td>Ведущий специалист</td>
+						<td>54-54-54</td>
+						<td>10.32.0.14</td>
+						<td>301-101-0212</td>
+						<td>301_Golovanova_R_O</td>
+						<td>301_Golovanova_R_O</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>Кралин Антоn Вадимович</td>
+						<td>Ведущий администратор сетей</td>
+						<td>54-54-52</td>
+						<td>10.32.0.200</td>
+						<td>301-101-2867</td>
+						<td>301_Kralin_A_V</td>
+						<td>301_Kralin_A_V</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td>иванов Иван Иванович</td>
+						<td>Начальник отдела</td>
+						<td>53-54-54</td>
+						<td>10.32.0.111</td>
+						<td>301-101-0257</td>
+						<td>301_Ivanov_I_I</td>
+						<td>301_Ivanov_I_I</td>
+						<td>1</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>				
+				</tbody>
+				</table>
+			</div>
+
+			<div id="left">
+				<button id="user" onclick="user_click();"> Пользователи</button>
+				<button id="fild" onclick="fild_click();"> Добавить доступ</button>
+			</div>
+		</div>
+	
+	<div id="user_dialog" style="display:none;" title="Пользователи">
+		<p><input type="text" id="FIO" alt="ФИО" value="ФИО" onfocus="if(this.value == 'ФИО') this.value=''" onblur="if(this.value=='') this.value='ФИО'" size="60px"/></p>
+		<p><input type="text" id="IP" alt="IP" value="IP адресс" onfocus="if(this.value == 'IP адресс') this.value=''" onblur="if(this.value=='') this.value='IP адресс'" size="60px"/></p>
+		<p><input type="text" id="COMP" alt="Имя компьютера" value="Имя компьютера" onfocus="if(this.value == 'Имя компьютера') this.value=''" onblur="if(this.value=='') this.value='Имя компьютера'" size="60px"/></p>
+		<p><input type="text" id="AD" alt="Логин AD" value="Логин AD" onfocus="if(this.value == 'Логин AD') this.value=''" onblur="if(this.value=='') this.value='Логин AD'" size="60px"/></p>
+		<p><input type="text" id="TEL" alt="Рабочий телефон" value="Рабочий телефон" onfocus="if(this.value == 'Рабочий телефон') this.value=''" onblur="if(this.value=='') this.value='Рабочий телефон'" size="60px"/></p>
+		<p><input type="text" id="job" alt="Должность" value="Должность" onfocus="if(this.value == 'ФИО') this.value=''" onblur="if(this.value=='') this.value='Должность'" size="60px"/></p>
+	</div>
+	
+	<div id="add_fild" style="display:none;" title="Добавить запись">
+		<p> Добавить запись</p>
+		<p>
+		<select >
+			<option size="60px">фио1</option>
+			<option>ФИО3</option>
+		</select>
+		</p>
+		<p><input type="text" id="login" alt="Логин в БД" value="Логин в БД" onfocus="if(this.value == 'Логин в БД') this.value=''" onblur="if(this.value=='') this.value='Логин в БД'" size="60px"/></p>
+		<p><input type="text" id="date_from" alt="Дата С" value="Дата С" onfocus="if(this.value == 'Дата С') this.value=''" onblur="if(this.value=='') this.value='Дата С'" size="60px" /></p>
+		<p><input type="text" id="date_to" alt="Дата ПО" value="Дата ПО" onfocus="if(this.value == 'Дата ПО') this.value=''" onblur="if(this.value=='') this.value='Дата ПО'" size="60px"/></p>
+		<p><input type="text" id="upload" alt="Выгрузка" value="Выгрузка" onfocus="if(this.value == 'Выгрузка') this.value=''" onblur="if(this.value=='') this.value='Выгрузка'" size="60px"/></p>
+		<p><input type="text" id="date_next" alt="Дата продления" value="Дата продления" onfocus="if(this.value == 'Дата продления') this.value=''" onblur="if(this.value=='') this.value='Дата продления'" size="60px"/></p>
+		<p>		
+			<select width="60px">
+				<option>действует</option>
+				<option>заблокирована</option>
+			</select>
+		</p>
+		<p><input type="text" id="notice" alt="Примечание" value="Примечание" onfocus="if(this.value == 'Примечание') this.value=''" onblur="if(this.value=='') this.value='Примечание'" size="60px"/></p>
+	</div>
+
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/sort.js"></script>
+	<script type="text/javascript" src="js/jquery1.js"></script>
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script>
+		$( "#user_dialog" ).dialog({
+			autoOpen: false,
+			width: 500,
+			buttons: [
+				{
+					text: "Ok",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				},
+				{
+					text: "Cancel",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			]
+		})
+		
+		$( "#add_fild" ).dialog({
+			autoOpen: false,
+			width: 500,
+			buttons: [
+				{
+					text: "Ok",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				},
+				{
+					text: "Cancel",
+					click: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+			]
+		})
+		
+		$( "#tabs" ).tabs();
+		
+		$(function(){
+			$("#date_from").datepicker({
+				changeYear: true
+			});
+		});
+		$(function(){
+			$("#date_to").datepicker({
+				changeYear: true
+			});
+		});
+	</script>
+	
+	</body>
+</html>
