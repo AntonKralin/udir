@@ -46,6 +46,9 @@ $bd = new BD();
                               echo "<td rowspan='2' style='height: 100px;'> </td>";
                               echo "<td  rowspan='2' style='height: 100px;'>Статус</td>";
                               foreach ($baseList as $base){
+                                  if ( $base->archive != 0){
+                                    continue;
+                                  }
                                   echo "<td colspan='2'>".$base->name."</td>";
                               }
                               
@@ -54,6 +57,9 @@ $bd = new BD();
                     <tr>
                         <?php 
                         foreach ($baseList as $base){
+                            if ( $base->archive != 0){
+                                continue;
+                            }
                             echo "<td><p class='vertical' style='height: 100px;'>Дата присвоения</p></td>";
                             echo "<td><p class='vertical' style='height: 100px;'>Дата прекращения</p></td>";
                         }
@@ -77,6 +83,9 @@ $bd = new BD();
                             echo "<td>".$ustate."</td>";
                             
                             foreach ($baseList as $base){
+                                if ( $base->archive != 0 ){
+                                    continue;
+                                }
                                 $rez = $localRequestionDAO->getReqestionByUserBase($bd, $user->id, $base->id);
                                 if ($rez != null){
                                     echo "<td>".$rez->date_from."</td>";

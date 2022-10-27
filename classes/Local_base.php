@@ -16,4 +16,5 @@ class Local_base {
     public $name = null;
     public $notice = null;
     public $id_region = null;
+    public $archive = null;
 }

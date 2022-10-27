@@ -71,6 +71,9 @@ $bd = new BD();
 
                         $baseList = $baseDAO->getBaseList($bd, $imns->id_region);
                         foreach($baseList as $base){
+                            if ($base->archive !=0 ){
+                                continue;
+                            }
                             if ($select_imns == 0){
                                 $requestionList = $requestionDAO->getRequestionByBaseRegion($bd, $base->id, $imns->id_region);
                             }else{
@@ -126,6 +129,10 @@ $bd = new BD();
                             $user = $userDAO->getUsersById($bd, $request->id_user);
                             $job = $jobDAO->getJobsById($bd, $user->id_jobs);
                             $imnsReq = $imnsDAO->getImnsById($bd, $imns->id);
+                            
+                            if ( $base->archive != 0){
+                                continue;
+                            }
                             
                             echo "<tr>";
                             echo "<td>".$imnsReq->number."</td>";

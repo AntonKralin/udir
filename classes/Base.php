@@ -18,4 +18,5 @@ class Base {
     public  $id_region = null;
     public  $new_login = null;
     public  $notice = null;
+    public  $archive = null;
 }

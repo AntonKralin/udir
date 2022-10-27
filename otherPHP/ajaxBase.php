@@ -12,7 +12,8 @@ if(!empty($_POST['baseId'])){
             'name' => $data->name,
             'shot_name' => $data->shot_name,
             'new_login' => $data->new_login,
-            'notice' => $data->notice
+            'notice' => $data->notice,
+            'archive' => $data->archive
         );
         echo json_encode($output);        
     }else{

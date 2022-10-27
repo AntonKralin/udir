@@ -10,7 +10,8 @@ if(!empty($_POST['baseLocalId'])){
         $output[] = array(
             'id' => $data->id,
             'name' => $data->name,
-            'notice' => $data->notice
+            'notice' => $data->notice,
+            'archive' => $data->archive
         );
         echo json_encode($output);        
     }else{

@@ -16,6 +16,7 @@ class BaseDAO {
         $base->id_region = $result['id_region'];
         $base->new_login = $result['new_login'];
         $base->notice = $result['notice'];
+        $base->archive = $result['archive'];
         return $base;
     }
     
@@ -40,12 +41,12 @@ class BaseDAO {
     }
     
     function insertBase($bd, $name, $shot, $id_region, $new_login, $notice){
-       $query="INSERT INTO `base`(`name`, `shot_name`, `id_region`, `new_login`, `notice`) VALUES('".$name."','".$shot."','".$id_region."', '".$new_login."', '".$notice."')";
+       $query="INSERT INTO `base`(`name`, `shot_name`, `id_region`, `new_login`, `notice`, `archive`) VALUES('".$name."','".$shot."','".$id_region."', '".$new_login."', '".$notice."', 0)";
         $bd->queryClean($query); 
     }
     
-    function updateBase($bd, $id, $name, $shot, $new_login, $notice){
-        $query="UPDATE `base` SET `name`='".$name."', `shot_name`='".$shot."', `new_login`='".$new_login."', `notice`='".$notice."' WHERE `id`='".$id."'";
+    function updateBase($bd, $id, $name, $shot, $new_login, $notice, $archive){
+        $query="UPDATE `base` SET `name`='".$name."', `shot_name`='".$shot."', `new_login`='".$new_login."', `notice`='".$notice."', `archive`=".$archive." WHERE `id`='".$id."'";
         $bd->queryClean($query);
     }
     

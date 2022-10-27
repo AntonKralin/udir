@@ -209,6 +209,9 @@ if ($baseList != null){
                         <?php 
                             foreach ($baseList as $elem ){
                                 $val = "";
+                                if ($elem->archive != 0){
+                                    continue;
+                                }
                                 if ($elem->id == $base->id){
                                     $val = "selected";
                                 }
@@ -332,6 +335,9 @@ if ($baseList != null){
                         <option value="0">Выберите локальный доступ</option>
                         <?php 
                             foreach ($baseList as $lbase){
+                                if ($lbase->archive != 0){
+                                    continue;
+                                }
                                 echo "<option value='".$lbase->id."'>".$lbase->name."</optin>";
                             }
                         ?>

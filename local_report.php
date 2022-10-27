@@ -45,6 +45,9 @@ $bd = new BD();
                               
                               echo "<td> </td>";
                               foreach ($baseList as $base){
+                                  if ( $base->archive != 0){
+                                    continue;
+                                  }
                                   echo "<td>".$base->name."</td>";
                               }
                               
@@ -64,6 +67,9 @@ $bd = new BD();
                             
                             foreach ($baseList as $base){
                                 $rez = $localRequestionDAO->getReqestionByUserBase($bd, $user->id, $base->id);
+                                if ( $base->archive != 0){
+                                    continue;
+                                }
                                 if ($rez != null){
                                     echo "<td>+</td>";
                                 }else{

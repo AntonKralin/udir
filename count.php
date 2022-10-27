@@ -46,6 +46,9 @@ $bd = new BD();
                             
                             echo "<td></td>";
                             foreach ($baseList as $elem){
+                                if ($elem->archive != 0){
+                                    continue;   
+                                }
                                 echo "<td>".$elem->shot_name."</td>";
                             }
                             
@@ -61,6 +64,9 @@ $bd = new BD();
                             
                             echo '<tr><td>'.$elem->number.'</td>';
                             foreach ($baseList as $base){
+                                if ($base->archive != 0){
+                                    continue;
+                                }
                                 $count = $requestionDAO->getActiveCount($bd, $base->id, $elem->id);
                                 echo '<td>'.$count.'</td>';
                             }

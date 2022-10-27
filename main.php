@@ -173,9 +173,13 @@ if(isset($inputs["saveBase"])){
     $shot = $inputs['baseShotName'];
     $newLogin = $inputs['baseNewLogin'];
     $baseNotice = $inputs['baseNotice'];
+    $baseArchive = 0;
+    if(isset($inputs["baseArchive"])){
+        $baseArchive = 1;
+    }
     $baseDAO = new BaseDAO();
     if($selectId != ""){
-        $baseDAO->updateBase($bd, $selectId, $name, $shot, $newLogin, $baseNotice);
+        $baseDAO->updateBase($bd, $selectId, $name, $shot, $newLogin, $baseNotice, $baseArchive);
     }else{
         $baseDAO->insertBase($bd, $name, $shot, $region->id, $newLogin, $baseNotice);
     }
@@ -191,8 +195,12 @@ if(isset($inputs['saveLocalBase'])){
     $selectId = $inputs['localBaseId'];
     $baseName = $inputs['localBaseName'];
     $baseNotice = $inputs['localBaseNotice'];
+    $baseArchive = 0;
+    if(isset($inputs["localBaseArchive"])){
+        $baseArchive = 1;
+    }
     if($selectId != ""){
-        $localBaseDao->updateBase($bd, $selectId, $baseName, $baseNotice);
+        $localBaseDao->updateBase($bd, $selectId, $baseName, $baseNotice, $baseArchive);
     }else{
         $localBaseDao->insertBase($bd, $baseName, $region->id, $baseNotice);
     }
@@ -359,6 +367,10 @@ if ($base == null){
                         <?php 
                             foreach ($baseList as $elem ){
                                 $val = "";
+                                //echo '<script>console.log('.$elem->archive.')</script>';
+                                if ($elem->archive != 0){
+                                    continue;
+                                }
                                 if ($elem->id == $base->id){
                                     $val = "selected";
                                 }
@@ -608,6 +620,9 @@ if ($base == null){
                         <option value="0" disabled selected>Выберите базу</option>
                         <?php 
                             foreach ($baseList as $base){
+                                if ($base->archive != 0){
+                                    continue;
+                                }
                                 echo "<option value='".$base->id."'>".$base->shot_name."</option>";
                             }
                         ?>
@@ -746,6 +761,9 @@ if ($base == null){
                         <option value="">Выберите значение</option>
                         <?php 
                             foreach ($baseList as $elem){
+                                if ($elem->archive != 0){
+                                    continue;
+                                }
                                 echo "<option value='".$elem->id."'>".$elem->shot_name."</option>";
                             }
                         ?>
@@ -754,6 +772,7 @@ if ($base == null){
                     <p><input type="text" id="baseShotName" name="baseShotName" value="" placeholder="Короткое наименование базы" title="Короткое наименование" style="width:480px"/></p>
                     <p><input type="text" id="baseNotice" name="baseNotice" value="" placeholder="Примечание" title="Примечание" style="width:480px"/></p>
                     <p><input type="text" id="baseNewLogin" name="baseNewLogin" value="" placeholder="Автосоздание логина" title="Автосоздание логина" style="width:480px"/></p>
+                    <p><input type="checkbox" id="baseArchive" name="baseArchive" /> <label for="archive">Архивная</label></p>
                     <input type="submit" id="saveBase" name="saveBase" value="Добавить" title="Сохранить"/>
                     <input type="submit" id="deleteBase" name="deleteBase" value="Удалить" title="Удалить" style="display:none" />
                     <input type="button" id="avtoButton" name = "avtoButton" value="Шаблон выгрузки" onclick="avtoButtonClick();" title="Автоматическое формирование" style="display: none"/>
@@ -777,6 +796,7 @@ if ($base == null){
                     </select>
                     <p><input type="text" id="localBaseName" name="localBaseName" value="" placeholder="Наименование локальной базы" title="Наименование локальной базы" style="width:480px"/></p>
                     <p><input type="text" id="localBaseNotice" name="localBaseNotice" value="" placeholder="Примечание" title="Примечание" style="width: 480px"></p>
+                    <p><input type="checkbox" id="localBaseArchive" name="localBaseArchive" /> <label for="archive">Архивная</label></p>
                     <input type="submit" id="saveLocalBase" name="saveLocalBase" value="Добавить" title="Сохранить"/>
                     <input type="submit" id="deleteLocalBase" name="deleteLocalBase" value="Удалить" title="Удалить" style="display:none" />
                 </form>
@@ -790,6 +810,9 @@ if ($base == null){
                                 echo'<input type="checkbox" name="check_all" />Выделить все';
                                 echo'<form id="form_otchet" target="_blank"  method="post" action="otchetall.php">';
                                 foreach ($baseList as $base) {
+                                    if ($base->archive != 0){
+                                        continue;
+                                    }
                                     echo '<input type="checkbox" name="req[]" value="'.$base->id.'">'.$base->shot_name.'<BR>';
                                 }
                                 echo'<p><input type="submit" name="report" value="Отчет по доступу" title="Сформировать отчет"></p>';
@@ -1088,6 +1111,11 @@ if ($base == null){
                                 document.getElementById('baseShotName').value=json[0].shot_name;
                                 document.getElementById('baseNewLogin').value=json[0].new_login;
                                 document.getElementById('baseNotice').value=json[0].notice;
+                                if (json[0].archive == 0){
+                                    document.getElementById('baseArchive').checked = false;
+                                }else{
+                                    document.getElementById('baseArchive').checked = true;
+                                }
                                 document.getElementById('saveBase').value='Сохранить';
                                 document.getElementById('deleteBase').style.display='inline';
                                 document.getElementById('avtoButton').style.display='inline';
@@ -1102,6 +1130,7 @@ if ($base == null){
                         document.getElementById('baseShotName').value="";
                         document.getElementById('baseNewLogin').value="";
                         document.getElementById('baseNotice').value="";
+                        document.getElementById('baseArchive').checked = false;
                         document.getElementById('saveBase').value='Добавить';
                         document.getElementById('deleteBase').style.display='none';
                         document.getElementById('avtoButton').style.display='none';
@@ -1120,6 +1149,11 @@ if ($base == null){
                             success: function(json){
                                 document.getElementById('localBaseName').value=json[0].name;
                                 document.getElementById('localBaseNotice').value=json[0].notice;
+                                if (json[0].archive == 0){
+                                    document.getElementById('localBaseArchive').checked = false;
+                                }else{
+                                    document.getElementById('localBaseArchive').checked = true;
+                                }
                                 document.getElementById('saveLocalBase').value='Сохранить';
                                 document.getElementById('deleteLocalBase').style.display='inline';
                             },
@@ -1130,6 +1164,7 @@ if ($base == null){
                     }else{
                         document.getElementById('localBaseName').value="";
                         document.getElementById('localBaseNotice').value="";
+                        document.getElementById('localBaseArchive').checked = false;
                         document.getElementById('saveLocalBase').value='Добавить';
                         document.getElementById('deleteLocalBase').style.display='none';
                     }

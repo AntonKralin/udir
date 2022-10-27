@@ -18,6 +18,7 @@ class Local_baseDAO {
         $local_base->name = $result["name"];
         $local_base->notice = $result["notice"];
         $local_base->id_region = $result["id_region"];
+        $local_base->archive = $result["archive"];
         return $local_base;
     }
     
@@ -42,12 +43,12 @@ class Local_baseDAO {
     }
     
     function insertBase($bd, $name,  $id_region, $notice){
-       $query="INSERT INTO `local_base`(`name`,  `id_region`, `notice`) VALUES('".$name."', '".$id_region."', '".$notice."')";
+       $query="INSERT INTO `local_base`(`name`,  `id_region`, `notice`, `archive`) VALUES('".$name."', '".$id_region."', '".$notice."', 0)";
         $bd->queryClean($query); 
     }
     
-    function updateBase($bd, $id, $name, $notice){
-        $query="UPDATE `local_base` SET `name`='".$name."', `notice`='".$notice."' WHERE `id`='".$id."'";
+    function updateBase($bd, $id, $name, $notice, $archive){
+        $query="UPDATE `local_base` SET `name`='".$name."', `notice`='".$notice."', `archive`=".$archive." WHERE `id`='".$id."'";
         $bd->queryClean($query);
     }
     
