@@ -370,7 +370,7 @@ if ($base == null){
                 </form> 
                 <div id="top_head_button">
                     <button id='certButton' onclick = 'certButtonClick();'>Сертификаты</button>
-                    <button id='locButton' onclick = 'locButtonClick();'>Локальные базы</button>
+                    <button id='locButton' onclick = 'locButtonClick();'>Локальные доступы</button>
                     <?php 
                         if ($admins->id_access <=3 ){
                             echo '<button id="unloaded" onclick="unloaded_click();"> Корректировки</button> ';
@@ -405,7 +405,7 @@ if ($base == null){
                 </div>
             </div>
                <?php    
-			    echo '<label_info>  '.$base->notice.' </label_info>';
+			    echo '<label_info><font id="blink"> '.$base->notice.' </font></label_info>';
                 ?>
             
                 <div id="work">
@@ -765,7 +765,7 @@ if ($base == null){
                 </form>
                 <hr>
                 <form id="localBaseForm" name="localBaseForm" autocomplete="off" method="post" action="main.php">
-                    <h3>Локальные базы:</h3>
+                    <h3>Локальные доступы:</h3>
                     <select id="localBaseId" name="localBaseId">
                         <option value="">Выберите значение</option>
                         <?php 
@@ -805,8 +805,8 @@ if ($base == null){
                             if (($admins->id_access == 3)){
                                 echo '<p><button id="count" onclick="count_click();"> Количество представленных доступов</button></p>';
                             }
-                            echo '<p><button id="localReport" onclick="localReportClick();">Локальные базы (+/-)</button></p>';
-                            echo '<p><button id="localReport" onclick="localReport2Click();">Локальные базы (с датами)</button></p>';
+                            echo '<p><button id="localReport" onclick="localReportClick();">Локальные доступы (+/-)</button></p>';
+                            echo '<p><button id="localReport" onclick="localReport2Click();">Локальные доступы (с датами)</button></p>';
                         ?>
                     </td>   
                 </tr></table>

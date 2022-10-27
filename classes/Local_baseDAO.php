@@ -31,7 +31,7 @@ class Local_baseDAO {
     }
     
     public function getBaseListByRegion($bd, $id_region){
-        $query = "SELECT * FROM `local_base` WHERE `id_region`='".$id_region."'";
+        $query = "SELECT * FROM `local_base` WHERE `id_region`='".$id_region."' ORDER BY `name` ASC";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){

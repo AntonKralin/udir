@@ -198,7 +198,7 @@ if ($baseList != null){
                 
                 <div id="top_center">
                     <!--    <?php echo "<H9>«Учет доступа к информационным ресурсам» ".$region->name."</H9>" ?> -->
-					<a href="main.php" class="ahead">«Учет доступа к информационным ресурсам». </a><H9 style="color: white;">Локальные базы.</H9>					
+					<a href="main.php" class="ahead">«Учет доступа к информационным ресурсам». </a><H9 style="color: white;">Локальные доступы.</H9>					
                 </div>
                     
             </div>
@@ -227,7 +227,7 @@ if ($baseList != null){
                 </div>
                 <div id="top_right">
                 <!--    <div id="top_right_name">
-                        <H9>Локальные базы </H9> &nbsp;
+                        <H9>Локальные доступы </H9> &nbsp;
                     </div> -->
                     <form id="export" name="export" style="display: inline;" method="post" action="local_base.php">
                         <input type="text" id="exportcsv2" name="exportcsv2" style="display: none;" value="exportcsv2" />
@@ -241,7 +241,7 @@ if ($baseList != null){
             
                 <?php    
                     if ($base != null){
-                        echo '<label_info>  '.$base->notice.' </label_info>';
+                        echo '<label_info><font id="blink"> '.$base->notice.' </font></label_info>';
                     }
                 ?>
             
@@ -316,7 +316,7 @@ if ($baseList != null){
             
             </div>    
                 
-            <div id="localDialog" style="display:none" title="Локальные базы">
+            <div id="localDialog" style="display:none" title="Локальные доступы">
                 <form id="localDialogForm" method="post" action="local_base.php"> 
                     <input type="text" name="localId" id="localId" value="" style="display: none">
                     <select id="localUserId" name="localUserId" >
@@ -329,7 +329,7 @@ if ($baseList != null){
                         ?>
                     </select>
                     <br><select id="localBaseId" name="localBaseId">
-                        <option value="0">Выберите локальную базу</option>
+                        <option value="0">Выберите локальный доступ</option>
                         <?php 
                             foreach ($baseList as $lbase){
                                 echo "<option value='".$lbase->id."'>".$lbase->name."</optin>";
