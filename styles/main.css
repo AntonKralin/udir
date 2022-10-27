@@ -347,3 +347,17 @@
 		margin: auto;
 	}
 }
+
+#blink {
+  -webkit-animation: blink 3s linear infinite;
+  animation: blink 3s linear infinite;
+  color: wheat;
+  font-weight: bold;
+  text-shadow: 1px 1px #333;
+}
+@-webkit-keyframes blink {
+  70% { color: white; }
+}
+@keyframes blink {
+  70% { color: white; }
+}

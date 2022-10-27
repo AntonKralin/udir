@@ -476,12 +476,17 @@ if (isset($inputs['exportcsv2'])){
                                 document.getElementById('certDateFrom').value=json[0].date_from;
                                 document.getElementById('certDateTo').value=json[0].date_to;
                                 //document.getElementById('certReason').value=json[0].reason;
+                                //console.log(json[0].reason)
                                 var sReason = document.getElementById('certReason');
                                 for (let optio in sReason.options){
                                     for (let value in json[0].reason){
-                                        if (value === optio.value ){
-                                            //console.log(value);
-                                            optio.selected = true;
+                                        //console.log(sReason[optio].text + " " )//+ json[0].reason[value])
+                                        if (sReason[optio].text === json[0].reason[value] ){
+                                            //console.log(json[0].reason[value]);
+                                            sReason[optio].selected = true;
+                                            break;
+                                        }else{
+                                            sReason[optio].selected = false;
                                         }
                                     }
                                 }
