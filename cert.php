@@ -59,8 +59,10 @@ if(isset($inputs['certDialogSubmit'])){
     $certDateFrom = $inputs['certDateFrom'];
     $certDateTo = $inputs['certDateTo'];
     $certReason = "";
-    foreach ($inputs['certReason'] as $el){
-        $certReason .= $el."; ";
+    if (isset($inputs['certReason'])){
+        foreach ($inputs['certReason'] as $el){
+            $certReason .= $el."; ";
+        }
     }
     $certReason = substr($certReason, 0, -2);
     $certStateID = $inputs['certState'];
@@ -470,7 +472,9 @@ if (isset($inputs['exportcsv2'])){
                                 let certName = new Map();
                                 certName.set ("ГосСУОК", 0);
                                 certName.set ("МНС",1);
-                                //console.log(json[0]);
+                                certName.set ("КлиентБанк",2);
+                                certName.set ("КлиентТК",3);
+                                //console.log(json[0].name);
                                 document.getElementById('certName').value=certName.get(json[0].name);
                                 document.getElementById('certNumber').value = json[0].number;
                                 document.getElementById('certDateFrom').value=json[0].date_from;
