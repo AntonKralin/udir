@@ -346,7 +346,7 @@ if (isset($inputs['exportcsv2'])){
                                 }
                             ?>
                         </select>
-                        <select id="certUser" name="certUser" >
+                        <br><select id="certUser" name="certUser" >
                         <option value="0"  selected>Выберите пользователя</option>
                         <?php 
                             $activUser = $usersDAO->getUsersActiveList($bd, $imns->id, "0");
@@ -356,23 +356,22 @@ if (isset($inputs['exportcsv2'])){
                         ?>
                         </select>
                         <?php 
-                            echo "<br><select id='certName' name='certName'>";
+                            echo "<p><h8>Тип сертификата: </h8><select id='certName' name='certName'>";
                             for ($i=0; $i<count($certName); $i++){
                                 echo "<option value='".$i."'>".$certName[$i]."</option>";
                             }
                             echo "</select>";
                         ?>
-                        <p><input type="text" id="certDateFrom" name="certDateFrom" readonly required value="" title="Дата предоставления" placeholder="Дата предоставления" onclick='choose_data(this);' style="width:480px"/>
-                        <p><input type="text" id="certDateTo" name="certDateTo" readonly required value="" title="Дата окончания" placeholder="Дата окончания" onclick='choose_data_to(this);' style="width:480px"/>
+                        <p><h8>Дата предоставления: </h8><input type="text" id="certDateFrom" name="certDateFrom" readonly required value="" title="Дата предоставления" placeholder="Дата предоставления" onclick='choose_data(this);' style="width:65%"/>
+                        <p><h8>Дата окончания: </h8><input type="text" id="certDateTo" name="certDateTo" readonly required value="" title="Дата окончания" placeholder="Дата окончания" onclick='choose_data_to(this);' style="width:74%"/>
+                        <p><h8>Серийный номер НКИ: </h8><input type="text" id="certNumber" name="certNumber" value="" title="Серийный номер НКИ" placeholder="Серийный номер НКИ" style="width:65%" autofocus/>
                         <?php 
-                            echo "<br><select id='certState' name='certState'>";
+                            echo "<p><h8>Статус: </h8><select id='certState' name='certState'>";
                             for ($i=0; $i<count($certState); $i++){
                                 echo "<option value='".$i."'>".$certState[$i]."</option>";
                             }
                             echo "</select>";
                         ?>
-                        
-                        <p><input type="text" id="certNumber" name="certNumber" value="" title="Номер" placeholder="Номер" style="width:480px" autofocus/>
                         <p>
                             <select id="certReason" name="certReason[]" multiple>
                                 <option value="" disabled>Основания для предоставления</option>

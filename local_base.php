@@ -285,11 +285,11 @@ if ($baseList != null){
                                     }
 
                                     if ($select_imns == 0){
-                                        $localRequestList = $localRequestDAO->getReqestionListByRegionBaseState($bd, $region->id, $base->id, "действующий");
+                                        $localRequestList = $localRequestDAO->getReqestionListByRegionBaseStateActive($bd, $region->id, $base->id);
                                     }else{
-                                        $localRequestList = $localRequestDAO->getReqestionListByImnsBaseState($bd, $imns->id, $base->id, "действующий");
+                                        $localRequestList = $localRequestDAO->getReqestionListByImnsBaseStateActive($bd, $imns->id, $base->id);
                                     }
-
+                                    
                                     foreach ($localRequestList as $local){
                                         echo "<tr>";
                                         $luser = $usersDAO->getUsersById($bd, $local->id_user);
@@ -342,16 +342,19 @@ if ($baseList != null){
                             }
                         ?>
                     </select>
-                    <p><input type="text" id="localDateFrom" name="localDateFrom" readonly required value="" title="Дата предоставления" placeholder="Дата предоставления" onclick='choose_data(this);' style="width:480px"/>
-                    <p><input type="text" id="localDateTo" name="localDateTo" readonly required value="" title="Дата окончания" placeholder="Дата окончания" onclick='choose_data_to(this);' style="width:480px"/>
-                    <p><input type="text" id="localDateDo" name="localDateDo" readonly required value="" title="Дата заявки" placeholder="Дата заявки" onclick='choose_data_do(this);' style="width:480px"/>
-                    <br><select id="localState" name="localState">
-                        <option value="действующий">действующий</optinon>
+                    <p><h8>Дата предоставления: </h8><input type="text" id="localDateFrom" name="localDateFrom" readonly required value="" title="Дата предоставления" placeholder="Дата предоставления" onclick='choose_data(this);' style="width:60%"/>
+                    <p><h8>Дата окончания: </h8><input type="text" id="localDateTo" name="localDateTo" readonly required value="" title="Дата окончания" placeholder="Дата окончания" onclick='choose_data_to(this);' style="width:70%"/>
+					<p><h8>Номер заявки:</h8><h7>(ИД документа в АСЭД)</h7><input type="text" id="localNumber" name="localNumber" required value="" title="Номер заявки" placeholder="Номер заявки" style="width:42%"/>
+                    <p><h8>Дата заявки: </h8><input type="text" id="localDateDo" name="localDateDo" readonly required value="" title="Дата заявки" placeholder="Дата заявки" onclick='choose_data_do(this);' style="width:76%"/>
+                    <p><h8>Статус: </h8>
+                    <select id="localState" name="localState">
+                        <option value="сформирован">сформирован</option>
+                        <option value="действующий">действующий</option>
                         <option value="прекращен">прекращен</option>
                     </select>
-                    <p><input type="text" id="localNumber" name="localNumber" required value="" title="Номер заявки" placeholder="Номер заявки" style="width:480px" autofocus/>
-                    <p><input type="text" id="localNotice" name="localNotice" value="" title="Примечание" placeholder="Примечание" style="width:480px"/>
-                    <br><input type="submit" id="localDialogSubmit" name="localDialogSubmit" value=Добавить />
+                    <p><h8>Примечание: </h8>
+                    <p><input type="text" id="localNotice" name="localNotice" value="" title="Примечание" placeholder="Примечание" style="width:400px" autofocus/>
+                    <p><input type="submit" id="localDialogSubmit" name="localDialogSubmit" value=Добавить />
                     <?php 
                         if ($admins->id_access <4){
                             echo '<input type="submit" id="localDialogDelete" name="localDialogDelete" value=Удалить />';
@@ -445,7 +448,7 @@ if ($baseList != null){
                         document.getElementById('localDateFrom').value="";
                         document.getElementById('localDateTo').value="";
                         document.getElementById('localDateDo').value="";
-                        document.getElementById('localState').value="действующий";
+                        document.getElementById('localState').value="сформирован";
                         document.getElementById('localNumber').value="";
                         document.getElementById('localNotice').value="";
                         document.getElementById('localDialogSubmit').value='Добавить';

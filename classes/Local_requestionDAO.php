@@ -58,6 +58,18 @@ class Local_requestionDAO {
         return $array;
     }
     
+    
+    public function getReqestionListByImnsBaseStateActive($bd, $id_imns, $id_local_base){
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` WHERE u.`id_imns`='".$id_imns."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`!='прекращен'";
+        $data = $bd->query($query);
+        $array = [];
+        for($i=0; $i<count($data); $i++){
+            $base = $this->getRequestionByResult($data[$i]);
+            $array[$i]=$base;            
+        }
+        return $array;
+    }
+    
     public function getReqestionListByRegion($bd, $id_region){
         $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` JOIN `imns` i ON u.`id_imns`=i.`id` WHERE i.`id_region`='".$id_region."'";
         $data = $bd->query($query);
@@ -71,6 +83,17 @@ class Local_requestionDAO {
     
     public function getReqestionListByRegionBaseState($bd, $id_region, $id_local_base, $state){
         $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` JOIN `imns` i ON u.`id_imns`=i.`id` WHERE i.`id_region`='".$id_region."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`='".$state."'";
+        $data = $bd->query($query);
+        $array = [];
+        for($i=0; $i<count($data); $i++){
+            $base = $this->getRequestionByResult($data[$i]);
+            $array[$i]=$base;            
+        }
+        return $array;
+    }
+    
+    public function getReqestionListByRegionBaseStateActive($bd, $id_region, $id_local_base){
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` JOIN `imns` i ON u.`id_imns`=i.`id` WHERE i.`id_region`='".$id_region."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`!='прекращен'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
