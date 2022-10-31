@@ -61,12 +61,13 @@ if(isset($inputs['localDialogSubmit'])){
     $sState = $inputs["localState"];
     $sNumber = $inputs["localNumber"];
     $sNotice = $inputs["localNotice"];
+    $sLogin = $inputs["localLogin"];
     $sButton = $inputs["localDialogSubmit"];
     
     if ($sButton == "Сохранить"){
-        $localRequestDAO->update($bd, $id, $fDate, $tDate, $dDate, $sState, $sNumber, $sNotice);
+        $localRequestDAO->update($bd, $id, $fDate, $tDate, $dDate, $sState, $sNumber, $sNotice, $sLogin);
     } else {
-        $localRequestDAO->insert($bd, $sUser, $sBase, $fDate, $tDate, $dDate, $sState, $sNumber, $sNotice);
+        $localRequestDAO->insert($bd, $sUser, $sBase, $fDate, $tDate, $dDate, $sState, $sNumber, $sNotice, $sLogin);
     }
     
 }
@@ -262,9 +263,10 @@ if ($baseList != null){
                                         <td width="5%">IP</td>
                                         <td width="5%">Дата предоставления</td>
                                         <td width="5%">Дата окончания</td>
-                                        <td width="5%">Дата заявки</td>
+                                        <td width="5%">Логин</td>
                                         <td width="7%">Статус</td>
                                         <td width="7%">Номер заявки</td>
+                                        <td width="5%">Дата заявки</td>
                                         <td >Примечание</td>
                                         <?php 
                                             if ($admins->id_access <= 4){
@@ -302,9 +304,10 @@ if ($baseList != null){
                                         echo "<td>".$luser->ip."</td>";
                                         echo "<td>".convertDate($local->date_from)."</td>";
                                         echo "<td>".convertDate($local->date_to)."</td>";
-                                        echo "<td>".convertDate($local->date_do)."</td>";
+                                        echo "<td>".$local->login."</td>";
                                         echo "<td>".$local->state."</td>";
                                         echo "<td>".$local->number."</td>";
+                                        echo "<td>".convertDate($local->date_do)."</td>";
                                         echo "<td>".$local->notice."</td>";
                                         if ($admins->id_access <= 4){
                                             echo '<td><input class="button" type="button" onclick="editLocalRequestion('.$local->id_user.','.$local->id_local_base.')" value="✎" title="Редактировать"></td>';
@@ -344,8 +347,9 @@ if ($baseList != null){
                     </select>
                     <p><h8>Дата предоставления: </h8><input type="text" id="localDateFrom" name="localDateFrom" readonly required value="" title="Дата предоставления" placeholder="Дата предоставления" onclick='choose_data(this);' style="width:60%"/>
                     <p><h8>Дата окончания: </h8><input type="text" id="localDateTo" name="localDateTo" readonly required value="" title="Дата окончания" placeholder="Дата окончания" onclick='choose_data_to(this);' style="width:70%"/>
-					<p><h8>Номер заявки:</h8><h7>(ИД документа в АСЭД)</h7><input type="text" id="localNumber" name="localNumber" required value="" title="Номер заявки" placeholder="Номер заявки" style="width:42%"/>
+                    <p><h8>Номер заявки:</h8><h7>(ИД документа в АСЭД)</h7><input type="text" id="localNumber" name="localNumber" required value="" title="Номер заявки" placeholder="Номер заявки" style="width:42%"/>
                     <p><h8>Дата заявки: </h8><input type="text" id="localDateDo" name="localDateDo" readonly required value="" title="Дата заявки" placeholder="Дата заявки" onclick='choose_data_do(this);' style="width:76%"/>
+                    <p><h8>Логин: </h8><input type="text" id="localLogin" name="localLogin"  value="" title="Логин" placeholder="Логин" style="width:86%"/>
                     <p><h8>Статус: </h8>
                     <select id="localState" name="localState">
                         <option value="сформирован">сформирован</option>
@@ -353,7 +357,7 @@ if ($baseList != null){
                         <option value="прекращен">прекращен</option>
                     </select>
                     <p><h8>Примечание: </h8>
-                    <p><input type="text" id="localNotice" name="localNotice" value="" title="Примечание" placeholder="Примечание" style="width:400px" autofocus/>
+                    <p><textarea id="localNotice" name="localNotice" value="" title="Примечание" placeholder="Примечание" style="width:400px" autofocus> </textarea>
                     <p><input type="submit" id="localDialogSubmit" name="localDialogSubmit" value=Добавить />
                     <?php 
                         if ($admins->id_access <4){
@@ -437,6 +441,7 @@ if ($baseList != null){
                                     document.getElementById('localState').value=json[0].state;
                                     document.getElementById('localNumber').value=json[0].number;
                                     document.getElementById('localNotice').value=json[0].notice;
+                                    document.getElementById('localLogin').value=json[0].login
                                     document.getElementById('localDialogSubmit').value='Сохранить';
                                 }
                            },
@@ -451,6 +456,7 @@ if ($baseList != null){
                         document.getElementById('localState').value="сформирован";
                         document.getElementById('localNumber').value="";
                         document.getElementById('localNotice').value="";
+                        document.getElementById('localLogin').value=""
                         document.getElementById('localDialogSubmit').value='Добавить';
                     }
                 }

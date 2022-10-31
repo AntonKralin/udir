@@ -139,7 +139,7 @@ $bd = new BD();
                             echo "<td>".$imnsReq->name."</td>";
                             echo "<td>".$user->fio."</td>";
                             echo "<td>".$job->name."</td>";
-                            echo "<td> </td>";
+                            echo "<td>".$request->login."</td>";
                             if ($request->state == "действующий"){
                                 echo "<td>Д</td>"; 
                             }else{

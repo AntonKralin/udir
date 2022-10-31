@@ -17,7 +17,8 @@ if(!empty($_POST['userId'])){
             'date_do' => $data->date_do,
             'state' => $data->state,
             'number' => $data->number,
-            'notice' => $data->notice
+            'notice' => $data->notice,
+            'login' => $data->login
         );
         echo json_encode($output);        
     }else{

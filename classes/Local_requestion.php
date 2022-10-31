@@ -21,4 +21,5 @@ class Local_requestion {
     public $state = null;
     public $number = null;
     public $notice = null;
+    public $login = null;
 }

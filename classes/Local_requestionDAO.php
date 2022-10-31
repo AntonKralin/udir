@@ -24,6 +24,7 @@ class Local_requestionDAO {
         $localRequestion->state = $result["state"];
         $localRequestion->notice = $result['notice'];
         $localRequestion->number = $result['number'];
+        $localRequestion->login = $result['login'];
         return $localRequestion;
     }
     
@@ -37,7 +38,7 @@ class Local_requestionDAO {
     }
     
     public function getReqestionListByImns($bd, $id_imns){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` WHERE u.`id_imns`='".$id_imns."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`login`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` WHERE u.`id_imns`='".$id_imns."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -48,7 +49,7 @@ class Local_requestionDAO {
     }
     
     public function getReqestionListByImnsBaseState($bd, $id_imns, $id_local_base, $state){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` WHERE u.`id_imns`='".$id_imns."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`='".$state."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`login`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` WHERE u.`id_imns`='".$id_imns."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`='".$state."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -60,7 +61,7 @@ class Local_requestionDAO {
     
     
     public function getReqestionListByImnsBaseStateActive($bd, $id_imns, $id_local_base){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` WHERE u.`id_imns`='".$id_imns."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`!='прекращен'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`login`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` WHERE u.`id_imns`='".$id_imns."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`!='прекращен'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -71,7 +72,7 @@ class Local_requestionDAO {
     }
     
     public function getReqestionListByRegion($bd, $id_region){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` JOIN `imns` i ON u.`id_imns`=i.`id` WHERE i.`id_region`='".$id_region."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`login`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` JOIN `imns` i ON u.`id_imns`=i.`id` WHERE i.`id_region`='".$id_region."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -82,7 +83,7 @@ class Local_requestionDAO {
     }
     
     public function getReqestionListByRegionBaseState($bd, $id_region, $id_local_base, $state){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` JOIN `imns` i ON u.`id_imns`=i.`id` WHERE i.`id_region`='".$id_region."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`='".$state."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`login`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` JOIN `imns` i ON u.`id_imns`=i.`id` WHERE i.`id_region`='".$id_region."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`='".$state."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -93,7 +94,7 @@ class Local_requestionDAO {
     }
     
     public function getReqestionListByRegionBaseStateActive($bd, $id_region, $id_local_base){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` JOIN `imns` i ON u.`id_imns`=i.`id` WHERE i.`id_region`='".$id_region."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`!='прекращен'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_local_base`, r.`date_from`, r.`date_to`, r.`date_do`, r.`state`, r.`notice`, r.`login`, r.`number` FROM `local_requestion` r JOIN `users` u ON r.`id_user`=u.`id` JOIN `imns` i ON u.`id_imns`=i.`id` WHERE i.`id_region`='".$id_region."' AND r.`id_local_base`='".$id_local_base."' AND r.`state`!='прекращен'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -123,19 +124,19 @@ class Local_requestionDAO {
         return $array;
     }
             
-    function insert($bd, $id_user, $id_local_base, $date_from, $date_to, $date_do, $state, $number, $notice){
+    function insert($bd, $id_user, $id_local_base, $date_from, $date_to, $date_do, $state, $number, $notice, $login){
         $date_from = checkDateSQL($date_from);
         $date_to = checkDateSQL($date_to);
         $date_do = checkDateSQL($date_do);
-        $query = "INSERT INTO `local_requestion`(`id_user`,`id_local_base`,`date_from`,`date_to`,`date_do`,`state`,`number`,`notice`) VALUES('".$id_user."','".$id_local_base."',".$date_from.",".$date_to.",".$date_do.",'".$state."','".$number."','".$notice."')";
+        $query = "INSERT INTO `local_requestion`(`id_user`,`id_local_base`,`date_from`,`date_to`,`date_do`,`state`,`number`,`notice`, `login`) VALUES('".$id_user."','".$id_local_base."',".$date_from.",".$date_to.",".$date_do.",'".$state."','".$number."','".$notice."', '".$login."')";
         $bd->queryClean($query);
     }
     
-    function update($bd, $id, $date_from, $date_to, $date_do, $state, $number, $notice){
+    function update($bd, $id, $date_from, $date_to, $date_do, $state, $number, $notice, $login){
         $date_from = checkDateSQL($date_from);
         $date_to = checkDateSQL($date_to);
         $date_do = checkDateSQL($date_do);
-        $query = "UPDATE `local_requestion` SET `date_from`=".$date_from.", `date_to`=".$date_to.", `date_do`=".$date_do.", `state`='".$state."', `number`='".$number."', `notice`='".$notice."' WHERE `id`='".$id."'";
+        $query = "UPDATE `local_requestion` SET `date_from`=".$date_from.", `date_to`=".$date_to.", `date_do`=".$date_do.", `state`='".$state."', `number`='".$number."', `notice`='".$notice."', `login`='".$login."' WHERE `id`='".$id."'";
         $bd->queryClean($query);
     }
     
