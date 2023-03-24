@@ -73,6 +73,7 @@ class Change_requestionDAO {
         $filds .= " C: ".$requestion->date_from;
         $filds .= " По: ".$requestion->date_to;
         $filds .= " Выгрузка: ".$requestion->date_upload;
+        $filds .= " Заявка: ".$requestion->number;
         $filds .= " ".$requestion->state.",".$requestion->request;
         $filds = str_replace("'", "", $filds);
         $date = date("Y-m-d H:i:s");

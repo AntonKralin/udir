@@ -16,5 +16,6 @@ class Requestion {
     public $date_upload = null;
     public $state = null;
     public $request = null;
+    public $number = null;
     public $notice = null;
 }

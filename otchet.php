@@ -201,6 +201,10 @@ $bd = new BD();
                                     $str = str_replace("%UFP", getRusPatronymic($lineUser->fio), $str);
                                 }
                                 
+                                $posRU = strpos($str, "%RU");
+                                if ($posRU !== false){
+                                    $str = str_replace("%RU", $line->number, $str);
+                                }
                                 
                                 $posUF = strpos($str, "%UF");
                                 if ($posUF !== false){

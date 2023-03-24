@@ -7,7 +7,7 @@
  */
 
 /**
- * Description of Avto_line
+ * Description of Local_Avtoline
  *
  * @author 301_Kralin_A_V
  */

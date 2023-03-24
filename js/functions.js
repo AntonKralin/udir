@@ -38,6 +38,10 @@ function avtoButtonClick(){
     document.getElementById('avto_hides').submit();
 }
 
+function localAvtoButtonClick(){
+    document.getElementById('local_avto_hides').submit();
+}
+
 function recourceButtonClick() {
 	$( "#add_fild" ).dialog( "open" );
 }
@@ -106,6 +110,10 @@ function check_click() {
 
 function create_click(){
 	document.getElementById('hidesotchet').submit();
+}
+
+function create_local_click(){
+	document.getElementById('hideslocalotchet').submit();
 }
 
 

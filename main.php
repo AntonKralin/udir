@@ -232,13 +232,13 @@ if (isset($inputs['exportcsv2'])){
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->getActiveSheet()->setCellValue("A1","ФИО");
         $objPHPExcel->getActiveSheet()->setCellValue("B1","Подразделение");
-        $objPHPExcel->getActiveSheet()->setCellValue("C1","Должность");
-        $objPHPExcel->getActiveSheet()->setCellValue("D1","Телефон");
-        $objPHPExcel->getActiveSheet()->setCellValue("E1","IP");
-        $objPHPExcel->getActiveSheet()->setCellValue("F1","Логин БД");
-        $objPHPExcel->getActiveSheet()->setCellValue("G1","Дата предоставления");
-        $objPHPExcel->getActiveSheet()->setCellValue("H1","Дата окончания");
-        $objPHPExcel->getActiveSheet()->setCellValue("I1","Дата выгрузки");
+        $objPHPExcel->getActiveSheet()->setCellValue("C1","Должность");       
+        $objPHPExcel->getActiveSheet()->setCellValue("D1","IP");
+        $objPHPExcel->getActiveSheet()->setCellValue("E1","Логин БД");
+        $objPHPExcel->getActiveSheet()->setCellValue("F1","Дата предоставления");
+        $objPHPExcel->getActiveSheet()->setCellValue("G1","Дата окончания");
+        $objPHPExcel->getActiveSheet()->setCellValue("H1","Дата выгрузки");
+        $objPHPExcel->getActiveSheet()->setCellValue("I1","Заявка");
         $objPHPExcel->getActiveSheet()->setCellValue("J1","Статус");
         $objPHPExcel->getActiveSheet()->setCellValue("K1","Примечание");
         if($select_imns == 0){
@@ -271,13 +271,13 @@ if (isset($inputs['exportcsv2'])){
             
             $objPHPExcel->getActiveSheet()->setCellValue("A".$i,$fio);
             $objPHPExcel->getActiveSheet()->setCellValue("B".$i,$unit);
-            $objPHPExcel->getActiveSheet()->setCellValue("C".$i,$name);
-            $objPHPExcel->getActiveSheet()->setCellValue("D".$i,$telefon);
-            $objPHPExcel->getActiveSheet()->setCellValue("E".$i,$ip);
-            $objPHPExcel->getActiveSheet()->setCellValue("F".$i,$requestion->login);
-            $objPHPExcel->getActiveSheet()->setCellValue("G".$i,convertDate($requestion->date_from));
-            $objPHPExcel->getActiveSheet()->setCellValue("H".$i,convertDate($requestion->date_to));
-            $objPHPExcel->getActiveSheet()->setCellValue("I".$i,convertDate($requestion->date_upload));
+            $objPHPExcel->getActiveSheet()->setCellValue("C".$i,$name);            
+            $objPHPExcel->getActiveSheet()->setCellValue("D".$i,$ip);
+            $objPHPExcel->getActiveSheet()->setCellValue("E".$i,$requestion->login);
+            $objPHPExcel->getActiveSheet()->setCellValue("F".$i,convertDate($requestion->date_from));
+            $objPHPExcel->getActiveSheet()->setCellValue("G".$i,convertDate($requestion->date_to));
+            $objPHPExcel->getActiveSheet()->setCellValue("H".$i,convertDate($requestion->date_upload));
+            $objPHPExcel->getActiveSheet()->setCellValue("I".$i,$requestion->number);
             $objPHPExcel->getActiveSheet()->setCellValue("J".$i,$state);
             $objPHPExcel->getActiveSheet()->setCellValue("K".$i,$requestion->notice);
             if ($select_imns == 0){
@@ -325,7 +325,7 @@ if ($base == null){
             <script type="text/javascript" src="js/selectize.min.js"></script>
             <script type="text/javascript" src="js/jquery.session.js"></script>
             <script type="text/javascript" src="js/sort.js?1"></script>
-            <script type="text/javascript" src="js/functions.js?12"></script>
+            <script type="text/javascript" src="js/functions.js?13"></script>
 	</head>
 
 	<body>
@@ -433,7 +433,7 @@ if ($base == null){
                                         <td width="13%" >ФИО</td>
                                         <td width="13%">Подразделение</td>
                                         <td width="13%">Должность</td>
-                                        <td width="4%">Телефон</td>
+                                        <!-- <td width="4%">Телефон</td> -->
                                         <td width="5%">IP</td>
                                         <!-- <td width="8%">Имя компьютера</td> -->
                                         <!-- <td width="7%">Логин AD</td> -->
@@ -441,6 +441,7 @@ if ($base == null){
                                         <td width="5%">Дата предоставления</td>
                                         <td width="5%">Дата окончания</td>
                                         <td width="5%">Дата выгрузки</td>
+                                        <td width="6%">№ Заявки</td>
                                         <td width="7%">Статус</td>
                                         <td >Примечание</td>
                                         <td width="1%"> </td>
@@ -514,12 +515,13 @@ if ($base == null){
                                         echo "<td ".$col.">".$fio."</td>";
                                         echo "<td ".$col.">".$unit."</td>";
                                         echo "<td ".$col.">".$name."</td>";
-                                        echo "<td ".$col.">".$telefon."</td>";
+                                        #echo "<td ".$col.">".$telefon."</td>";
                                         echo "<td ".$col.">".$ip."</td>";
                                         echo "<td ".$col1.">".$requestion->login."</td>";
                                         echo "<td ".$col1.">".convertDate($requestion->date_from)."</td>";
                                         echo "<td ".$col1.">".convertDate($requestion->date_to)."</td>";
                                         echo "<td ".$col1.">".convertDate($requestion->date_upload)."</td>";
+                                        echo "<td>".$requestion->number."</td>";
                                         echo "<td ".$col1.">".$state."</td>";
                                         echo "<td ".$col1.">".$requestion->notice."</td>";
                                         if ($admins->id_access != 5){
@@ -542,6 +544,11 @@ if ($base == null){
             
             <form id="avto_hides" method="post" autocomplete="off" target="_blank" style="display:none" action="config_avto.php">
 		<input type="text" id='id_avto_base' name="id_avto_base">
+		<input type="submit" name='sub_avto'>
+            </form>
+            
+            <form id="local_avto_hides" method="post" autocomplete="off" target="_blank" style="display:none" action="config_local_avto.php">
+		<input type="text" id='id_local_avto_base' name="id_local_avto_base">
 		<input type="submit" name='sub_avto'>
             </form>
             
@@ -572,9 +579,9 @@ if ($base == null){
                             }
                         ?>
                     </select></p> 
-                    <p><input type="text" id="userFio" name="userFio" required value="" title="ФИО" placeholder="ФИО" style="width:480px" autofocus/>
-                    <p><input type="text" id="userTelefon" name="userTelefon" required value="" style="width:480px" pattern='8[0-9]{5,}' title="Рабочий телефон (8xxxxxxxxxx)" placeholder="Рабочий телефон (8xxxxxxxxxx)"/>
-                    <p><input type="text" required pattern="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" id="userIP" name="userIP" title='IP адрес (xxx.xxx.xxx.xxx)' placeholder="IP адрес (xxx.xxx.xxx.xxx)" style="width:480px"/></p>
+                    <p><h8>Фамилия Имя Отчество: </h8><input type="text" id="userFio" name="userFio" required value="" title="Фамилия Имя Отчество" placeholder="Фамилия Имя Отчество" style="width:62%" autofocus/>
+                    <p><h8>Рабочий телефон:</h8><h7>(8xxxxxxxxxx) </h7><input type="text" id="userTelefon" name="userTelefon" required value="" style="width:55%" pattern='8[0-9]{5,}' title="Рабочий телефон (8xxxxxxxxxx)" placeholder="Рабочий телефон (8xxxxxxxxxx)"/>
+                    <p><h8>IP адрес:</h8><h7>(xxx.xxx.xxx.xxx) </h7><input type="text" required pattern="\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" id="userIP" name="userIP" title='IP адрес (xxx.xxx.xxx.xxx)' placeholder="IP адрес (xxx.xxx.xxx.xxx)" style="width:66%"/></p>
                     <p><input type="submit" id="userSubmit" name="userSubmit" value="Добавить" title="Сохранить"/>
 					<br>__________<br><h7>*Для изменения сведений выберите пользователя, внесите необходимые изменения<br>и подтвердите свои действия.</h7><br>
                     <input type="submit" id="disableSubmit" name="disableSubmit" value="Деактивировать" style="display:none;" title="Сохранить"/></p>
@@ -616,7 +623,7 @@ if ($base == null){
                             }
                         ?>
                     </select>    
-                    <p><select name="select_base">
+                    <p><select name="select_base" style="width:100%">
                         <option value="0" disabled selected>Выберите базу</option>
                         <?php 
                             foreach ($baseList as $base){
@@ -627,8 +634,8 @@ if ($base == null){
                             }
                         ?>
                     </select>
-                    
-                    <input type="text" name="notice" title='Примечание' placeholder="Примечание" style="width:310px" autofocus/></p>
+                    <p><h8>Примечание: </h8>
+                    <p><textarea name="notice" title='Примечание' placeholder="Примечание" style="width:100%" autofocus/> </textarea></p>
                     <input type="submit" name="add" value="Добавить доступ" title="Добавить доступ">
                     <input type="submit" name="update" value="Изменить доступ" title="Изменить доступ">
                     <?php 
@@ -798,6 +805,7 @@ if ($base == null){
                     <p><input type="text" id="localBaseNotice" name="localBaseNotice" value="" placeholder="Примечание" title="Примечание" style="width: 480px"></p>
                     <p><input type="checkbox" id="localBaseArchive" name="localBaseArchive" /> <label for="archive">Архивная</label></p>
                     <input type="submit" id="saveLocalBase" name="saveLocalBase" value="Добавить" title="Сохранить"/>
+                    <input type="button" id="localAvtoButton" name = "localAvtoButton" value="Шаблон выгрузки" onclick="localAvtoButtonClick();" title="Автоматическое формирование" style="display: none"/>
                     <input type="submit" id="deleteLocalBase" name="deleteLocalBase" value="Удалить" title="Удалить" style="display:none" />
                 </form>
             </div>
@@ -1155,6 +1163,8 @@ if ($base == null){
                                     document.getElementById('localBaseArchive').checked = true;
                                 }
                                 document.getElementById('saveLocalBase').value='Сохранить';
+                                document.getElementById('id_local_avto_base').value = json[0].id;
+                                document.getElementById('localAvtoButton').style.display='inline';
                                 document.getElementById('deleteLocalBase').style.display='inline';
                             },
                             error: function(jqXHR, textStatus, errorThrown){
@@ -1166,7 +1176,9 @@ if ($base == null){
                         document.getElementById('localBaseNotice').value="";
                         document.getElementById('localBaseArchive').checked = false;
                         document.getElementById('saveLocalBase').value='Добавить';
+                        document.getElementById('id_local_avto_base').value = "";
                         document.getElementById('deleteLocalBase').style.display='none';
+                        document.getElementById('localAvtoButton').style.display='none';
                     }
                 });
                 

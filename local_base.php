@@ -146,6 +146,7 @@ if ($baseList != null){
     
     if ($base == null){
         $base = $baseList[0];
+        $_SESSION["lbase"] = serialize($base);
     }
 }
 
@@ -164,7 +165,7 @@ if ($baseList != null){
             <link rel="stylesheet" href="styles/jquery-ui.structure.min.css" type="text/css" />
             <link rel="stylesheet" href="styles/jquery-ui.theme.min.css" type="text/css" />
             <link rel="stylesheet" href="styles/selectize.default.css" type="text/css" />
-            <script type="text/javascript" src="js/functions.js?1"></script>
+            <script type="text/javascript" src="js/functions.js?13"></script>
             <script type="text/javascript" src="js/jquery.js"></script>
             <script type="text/javascript" src="js/jquery-ui.min.js"></script>
             <script type="text/javascript" src="js/selectize.min.js"></script>
@@ -225,7 +226,8 @@ if ($baseList != null){
                 <div id="top_head_button">
                     <?php 
                         if ( ($admins->id_access == "3") || ($admins->id_access == "4") ){
-                            echo '<button id="localButton" onclick="localButtonClick();">Локальные доступы</button>';                    
+                            echo '<button id="localButton" onclick="localButtonClick();">Локальные доступы</button>'; 
+                            echo '<input type="button" name="createlocalavto" onclick="create_local_click()" value="Сформировать автоматически" title="Сформировать автоматически">';
                         }
                     ?>
                 </div>
@@ -321,6 +323,11 @@ if ($baseList != null){
                 </div>
             
             </div>    
+            
+            <form id="hideslocalotchet" method="post" autocomplete="off" target="_blank" style="display:none" action="local_otchet.php">
+                <input type="text" id='id_base' name="sub_create" value="1">
+                <input type="submit" id='sub_hides2' name='sub_creates'>
+            </form>    
                 
             <div id="localDialog" style="display:none" title="Локальные доступы">
                 <form id="localDialogForm" method="post" action="local_base.php"> 
@@ -347,7 +354,7 @@ if ($baseList != null){
                     </select>
                     <p><h8>Дата предоставления: </h8><input type="text" id="localDateFrom" name="localDateFrom" readonly required value="" title="Дата предоставления" placeholder="Дата предоставления" onclick='choose_data(this);' style="width:60%"/>
                     <p><h8>Дата окончания: </h8><input type="text" id="localDateTo" name="localDateTo" readonly required value="" title="Дата окончания" placeholder="Дата окончания" onclick='choose_data_to(this);' style="width:70%"/>
-                    <p><h8>Номер заявки:</h8><h7>(ИД документа в АСЭД)</h7><input type="text" id="localNumber" name="localNumber" required value="" title="Номер заявки" placeholder="Номер заявки" style="width:42%"/>
+                    <p><h8>Номер заявки:</h8><h7>("№ пп"_"ИД док в АСЭД")</h7><input type="text" id="localNumber" name="localNumber" required value="" title="Номер заявки" placeholder="Номер заявки" style="width:42%"/>
                     <p><h8>Дата заявки: </h8><input type="text" id="localDateDo" name="localDateDo" readonly required value="" title="Дата заявки" placeholder="Дата заявки" onclick='choose_data_do(this);' style="width:76%"/>
                     <p><h8>Логин: </h8><input type="text" id="localLogin" name="localLogin"  value="" title="Логин" placeholder="Логин" style="width:86%"/>
                     <p><h8>Статус: </h8>

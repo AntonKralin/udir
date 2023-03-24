@@ -364,7 +364,7 @@ if (isset($inputs['exportcsv2'])){
                         ?>
                         <p><h8>Дата предоставления: </h8><input type="text" id="certDateFrom" name="certDateFrom" readonly required value="" title="Дата предоставления" placeholder="Дата предоставления" onclick='choose_data(this);' style="width:65%"/>
                         <p><h8>Дата окончания: </h8><input type="text" id="certDateTo" name="certDateTo" readonly required value="" title="Дата окончания" placeholder="Дата окончания" onclick='choose_data_to(this);' style="width:74%"/>
-                        <p><h8>Серийный номер НКИ: </h8><input type="text" id="certNumber" name="certNumber" value="" title="Серийный номер НКИ" placeholder="Серийный номер НКИ" style="width:65%" autofocus/>
+                        <p><h8>Серийный номер НКИ: </h8><input type="text" id="certNumber" name="certNumber" value="" title="Серийный номер НКИ" placeholder="Серийный номер НКИ" style="width:65%"/>
                         <?php 
                             echo "<p><h8>Статус: </h8><select id='certState' name='certState'>";
                             for ($i=0; $i<count($certState); $i++){
@@ -374,7 +374,7 @@ if (isset($inputs['exportcsv2'])){
                         ?>
                         <p>
                             <select id="certReason" name="certReason[]" multiple>
-                                <option value="" disabled>Основания для предоставления</option>
+                                <option value="" disabled autofocus>Основания для предоставления</option>
                                 <?php 
                                     $act = "";
                                     foreach($sertBase as $reason){

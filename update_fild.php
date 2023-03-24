@@ -46,7 +46,7 @@ if (isset($inputs['upd_fild'])){
             $date_upload = date("Y-m-d");
     }
     echo $date_upload;
-    $requestionDAO->updateFild2($bd, $inputs['id'], $inputs['login'], $inputs['date_from'], $inputs['date_to'], $date_upload, $inputs['state'], $inputs['request'], $inputs['notice'], $admins->id);
+    $requestionDAO->updateFild2($bd, $inputs['id'], $inputs['login'], $inputs['date_from'], $inputs['date_to'], $date_upload, $inputs['state'], $inputs['request'], $inputs['number'],$inputs['notice'], $admins->id);
     header("Location: ".$_SESSION["HTTP_REFERER"]);
     exit;
 }
@@ -60,12 +60,13 @@ if (isset($inputs['del_fild'])){
 if (isset($inputs['add'])){
     $id_user = $inputs['select_user'];
     $id_base = $inputs['select_base'];
+    $number = $inputs['number'];
     $notice = $inputs['notice'];
     $date_upload = date("Y-m-d");
     $login = $requestionDAO->createNewLogin($bd, $imns->id, $id_user, $id_base);
     $count = $requestionDAO->getCountBaseUser($bd, $id_base, $id_user);
     if ($count == 0){
-        $requestionDAO->insertFild2($bd, $id_user, $id_base, $imns->id, $login, $date_upload, $fild_state[0], $request_state[0], $notice, $admins->id);
+        $requestionDAO->insertFild2($bd, $id_user, $id_base, $imns->id, $login, $date_upload, $fild_state[0], $request_state[0], $number, $notice, $admins->id);
     }
     //echo '<script>window.close()</script>';
     header("Location: ".$_SESSION["HTTP_REFERER"]);
@@ -150,6 +151,7 @@ if (isset($inputs['requestion_log'])){
                             
                             echo '<form class="user_update_form" onsubmit="return validate_form();" autocomplete="off" method="post" action="update_fild.php">';
                             echo "<p><label><h8>Логин:</h8></label><input type='text' placeholder='Логин' title='Логин информационного ресурса' name='login' value='".$requestion->login."'></p>";
+                            echo "<p><label><h8>№ заявки:</h8></label><input type='text' placeholder='№ заявки' title='№ заявки информационного ресурса' name='number' value='".$requestion->number."'></p>";
                             echo "<p><label><h8>Дата предоставления доступа:</h8></label><input type='text' readonly placeholder='Дата предоставления доступа' title='Дата предоставления' onclick='choose_data(this);' id='date_from' name='date_from' id='date_from' value='".$requestion->date_from."'></p>";
                             echo "<p><label><h8>Дата прекращения (окончания) доступа:</h8></label><input type='text' readonly placeholder='Дата прекращения (окончания) доступа' title='Дата прекращения' onclick='choose_data_to(this);' id='date_to' name='date_to' id='date_to' value='".$requestion->date_to."'></p>";
                             $table_select = "<p><label><h8>Статус:</h8></label><select onchange='check_select(this.value)' title ='Статус' id='state' name='state'>";

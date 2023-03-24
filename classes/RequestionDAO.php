@@ -22,6 +22,7 @@ class RequestionDAO {
         $requestion->date_upload = $result['date_upload'];
         $requestion->state = $result['state'];
         $requestion->request = $result['request'];
+        $requestion->number = $result['number'];
         $requestion->notice = $result['notice'];
         return $requestion;
     }
@@ -36,7 +37,7 @@ class RequestionDAO {
     }
     
     function getRequestionByBaseRegion ($bd, $id_base, $id_region){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."' AND r.`id_base`='".$id_base."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."' AND r.`id_base`='".$id_base."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -47,7 +48,7 @@ class RequestionDAO {
     }
     
     function getActivRequestionByBaseRegion ($bd, $id_base, $id_region){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."' AND r.`id_base`='".$id_base."' AND (r.`state`!='прекращен' AND r.`state`!='отказано')";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."' AND r.`id_base`='".$id_base."' AND (r.`state`!='прекращен' AND r.`state`!='отказано')";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -58,7 +59,7 @@ class RequestionDAO {
     }
     
     function getRequestionByBaseStateRegion($bd, $id_base, $state, $id_region){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."' AND r.`id_base`='".$id_base."' AND r.`state`='".$state."' ORDER BY r.`id_imns`";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."' AND r.`id_base`='".$id_base."' AND r.`state`='".$state."' ORDER BY r.`id_imns`";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -69,7 +70,7 @@ class RequestionDAO {
     }
 
     function getRequestionByBaseStateRequest($bd, $id_base, $state, $request){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`notice` FROM `requestion` r WHERE r.`request`='".$request."' AND r.`id_base`='".$id_base."' AND r.`state`='".$state."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number`, r.`notice` FROM `requestion` r WHERE r.`request`='".$request."' AND r.`id_base`='".$id_base."' AND r.`state`='".$state."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -80,7 +81,7 @@ class RequestionDAO {
     }
     
     function getRequestionByBaseStateRequestImns($bd, $id_base, $state, $request, $imns){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`notice` FROM `requestion` r WHERE r.`request`='".$request."' AND r.`id_base`='".$id_base."' AND r.`state`='".$state."' AND r.`id_imns`='".$imns."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number', r.`notice` FROM `requestion` r WHERE r.`request`='".$request."' AND r.`id_base`='".$id_base."' AND r.`state`='".$state."' AND r.`id_imns`='".$imns."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -123,7 +124,7 @@ class RequestionDAO {
     }
     
     function getRequestionByStateRegion($bd, $state, $id_region){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."' AND r.`state`='".$state."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."' AND r.`state`='".$state."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -145,7 +146,7 @@ class RequestionDAO {
     }
     
     function getRequestionByRegion($bd, $id_region){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number`, r.`notice` FROM `requestion` r JOIN `imns` i ON r.`id_imns`=i.`id` JOIN `region` q ON q.`id`=i.`id_region` WHERE q.`id`='".$id_region."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){
@@ -230,17 +231,17 @@ class RequestionDAO {
     }
 
 
-    function insertFild($bd, $id_user, $id_base, $id_imns, $login, $date_from, $date_to, $date_upload, $state, $request, $notice){
+    function insertFild($bd, $id_user, $id_base, $id_imns, $login, $date_from, $date_to, $date_upload, $state, $request, $number, $notice){
         $date_from = checkDateSQL($date_from);
         $date_to = checkDateSQL($date_to);
         $date_upload = checkDateSQL($date_upload);
-        $query = "INSERT INTO `requestion`(`id_user`, `id_base`, `id_imns`, `login`, `date_from`, `date_to`, `date_upload`, `state`, `request`, `notice`) VALUES ('".$id_user."','".$id_base."','".$id_imns."','".$login."',".$date_from.",".$date_to.",".$date_upload.",'".$state."','".$request."','".$notice."');";
+        $query = "INSERT INTO `requestion`(`id_user`, `id_base`, `id_imns`, `login`, `date_from`, `date_to`, `date_upload`, `state`, `request`, `number`, `notice`) VALUES ('".$id_user."','".$id_base."','".$id_imns."','".$login."',".$date_from.",".$date_to.",".$date_upload.",'".$state."','".$request."','".$number."','".$notice."');";
         $bd->queryClean($query);
     }
 
-    function insertFild2($bd, $id_user, $id_base, $id_imns, $login,  $date_upload, $state, $request, $notice, $id_admins){
+    function insertFild2($bd, $id_user, $id_base, $id_imns, $login,  $date_upload, $state, $request, $number, $notice, $id_admins){
         $date_upload = checkDateSQL($date_upload);
-        $query = "INSERT INTO `requestion`(`id_user`, `id_base`, `id_imns`, `login`, `date_upload`, `state`, `request`, `notice`) VALUES ('".$id_user."','".$id_base."','".$id_imns."','".$login."',".$date_upload.",'".$state."','".$request."','".$notice."');";
+        $query = "INSERT INTO `requestion`(`id_user`, `id_base`, `id_imns`, `login`, `date_upload`, `state`, `request`, `number`, `notice`) VALUES ('".$id_user."','".$id_base."','".$id_imns."','".$login."',".$date_upload.",'".$state."','".$request."','".$number."','".$notice."');";
         //echo $query;
         $bd->queryClean($query);
         $requestion = new Requestion();
@@ -251,6 +252,7 @@ class RequestionDAO {
         $requestion->date_from = null;
         $requestion->date_to = null;
         $requestion->date_upload = $date_upload;
+        $requestion->number = $number;
         $requestion->state = $state;
         $requestion->request = $request;
         $requestion->notice = $notice;
@@ -258,12 +260,12 @@ class RequestionDAO {
         $changeRequestionDAO->insert($bd, $id_admins, $requestion);
     }
     
-    function updateFild($bd, $id, $id_user, $id_base, $id_imns, $login, $date_from, $date_to, $date_upload, $state, $request, $notice){
-        $query = "UPDATE `requestion` SET `id_user`='".$id_user."', `id_base`='".$id_base."', `id_imns`='".$id_imns."', `login`='".$login."', `date_from`='".$date_from."', `date_to`='".$date_to."', `date_upload`='".$date_upload."', `state`='".$state."', `request`='".$request."', `notice`='".$notice."' WHERE `id`='".$id."'";
+    function updateFild($bd, $id, $id_user, $id_base, $id_imns, $login, $date_from, $date_to, $date_upload, $state, $request, $number, $notice){
+        $query = "UPDATE `requestion` SET `id_user`='".$id_user."', `id_base`='".$id_base."', `id_imns`='".$id_imns."', `login`='".$login."', `date_from`='".$date_from."', `date_to`='".$date_to."', `date_upload`='".$date_upload."', `state`='".$state."', `request`='".$request."', `number`='".$number."', `notice`='".$notice."' WHERE `id`='".$id."'";
         $bd->queryClean($query);
     }
     
-    function updateFild2($bd, $id, $login, $date_from, $date_to, $date_upload, $state, $request, $notice, $id_admins){
+    function updateFild2($bd, $id, $login, $date_from, $date_to, $date_upload, $state, $request, $number, $notice, $id_admins){
         $date_from = checkDateSQL($date_from);
         $date_to = checkDateSQL($date_to);
         $date_upload = checkDateSQL($date_upload);
@@ -277,7 +279,7 @@ class RequestionDAO {
         }else{
             $request = ", `request`='".$request."'";
         }
-        $query = "UPDATE `requestion` SET `login`='".$login."', `date_from`=".$date_from.", `date_to`=".$date_to.", `date_upload`=".$date_upload." ".$state.$request.", `notice`='".$notice."' WHERE `id`='".$id."'";
+        $query = "UPDATE `requestion` SET `login`='".$login."', `date_from`=".$date_from.", `date_to`=".$date_to.", `date_upload`=".$date_upload." ".$state.$request.", `number`='".$number."', `notice`='".$notice."' WHERE `id`='".$id."'";
         $bd->queryClean($query);
         $requestion = $this->getRequestionById($bd, $id);
         $changeRequestionDAO = new Change_requestionDAO();
