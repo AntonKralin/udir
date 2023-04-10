@@ -199,6 +199,17 @@ class RequestionDAO {
         }
         return $array;
     }
+    
+    function getRequestionOlder5YearsByRegion($bd, $id_region){
+        $query = 'SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number`, r.`notice` FROM `requestion` AS r JOIN `imns` AS i ON r.`id_imns`=i.`id` WHERE r.`date_to` < DATE_ADD(CURRENT_DATE(), INTERVAL - 5 YEAR) and r.`state` = "прекращен" and i.`id_region`='.$id_region;
+        $data = $bd->query($query);
+        $array = [];
+        for($i=0; $i<count($data); $i++){
+            $base = $this->getRequestionByResult($data[$i]);
+            $array[$i]=$base;            
+        }
+        return $array;
+    }
 
     function getActiveCount($bd, $id_base, $id_imns){
         $query = 'SELECT COUNT(*) FROM `requestion` WHERE `id_base`="'.$id_base.'" AND `id_imns`="'.$id_imns.'" AND !((`request`="предоставление" and `state`="выгружен на область") OR (`request`="предоставление" and `state`="отправлен в МНС") or (`state`="прекращен") or (`state`="отказано"))';

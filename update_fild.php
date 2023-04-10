@@ -133,6 +133,8 @@ if (isset($inputs['requestion_log'])){
                 <div class ="center_div">
                     <?php 
                         if (($requestion != null) && ($user != null)){
+                            $baseDAO = new BaseDAO();
+                            $base = $baseDAO->getBaseById($bd, $requestion->id_base);
                             $count = $requestionDAO->getActiveCount($bd, $base->id, $imns->id);
                             echo "<H3>Количество действующих учеток в имнс:".$count."</H3>";
                             echo "<H2>".$base->shot_name."</H2>";

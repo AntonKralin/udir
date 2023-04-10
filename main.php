@@ -325,7 +325,7 @@ if ($base == null){
             <script type="text/javascript" src="js/selectize.min.js"></script>
             <script type="text/javascript" src="js/jquery.session.js"></script>
             <script type="text/javascript" src="js/sort.js?1"></script>
-            <script type="text/javascript" src="js/functions.js?13"></script>
+            <script type="text/javascript" src="js/functions.js?17"></script>
 	</head>
 
 	<body>
@@ -835,6 +835,7 @@ if ($base == null){
                         <?php
                             if (($admins->id_access == 3)){
                                 echo '<p><button id="count" onclick="count_click();"> Количество представленных доступов</button></p>';
+                                echo '<p><button id="count" onclick="expired_click();"> Прекращенные доступы старше 5 лет</button></p>';
                             }
                             echo '<p><button id="localReport" onclick="localReportClick();">Локальные доступы (+/-)</button></p>';
                             echo '<p><button id="localReport" onclick="localReport2Click();">Локальные доступы (с датами)</button></p>';

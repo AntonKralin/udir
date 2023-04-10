@@ -139,7 +139,9 @@ function go_to_main_click(http) {
 	//history.go(-1);
 }
 
-
+function expired_click(){
+	window.open("expired_requestion.php", "_blank");
+}
 
 function count_click(){
 	//document.location.href = "unloaded.php";
