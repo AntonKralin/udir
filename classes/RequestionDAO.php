@@ -81,7 +81,7 @@ class RequestionDAO {
     }
     
     function getRequestionByBaseStateRequestImns($bd, $id_base, $state, $request, $imns){
-        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number', r.`notice` FROM `requestion` r WHERE r.`request`='".$request."' AND r.`id_base`='".$id_base."' AND r.`state`='".$state."' AND r.`id_imns`='".$imns."'";
+        $query = "SELECT r.`id`, r.`id_user`, r.`id_base`, r.`id_imns`, r.`login`, r.`date_from`, r.`date_to`, r.`date_upload`, r.`state`, r.`request`, r.`number`, r.`notice` FROM `requestion` r WHERE r.`request`='".$request."' AND r.`id_base`='".$id_base."' AND r.`state`='".$state."' AND r.`id_imns`='".$imns."'";
         $data = $bd->query($query);
         $array = [];
         for($i=0; $i<count($data); $i++){

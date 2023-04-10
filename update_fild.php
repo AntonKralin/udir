@@ -112,7 +112,6 @@ if (isset($inputs['requestion_log'])){
             <script type="text/javascript" src="js/jquery-ui.min.js"></script>
             <script type="text/javascript" src="js/selectize.min.js"></script>
             <script type="text/javascript"> 
-            <script type="text/javascript"> 
                 function validate_form(){
                         var valid = true;
                         if ( (document.getElementById("state").value=="действующий") && (document.getElementById("date_from").value=="") ){
