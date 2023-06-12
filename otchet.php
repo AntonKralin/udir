@@ -116,14 +116,22 @@ $bd = new BD();
                         }
                         echo "</tr>";
                         
+                        $serial_number = 0;
                         foreach ($requestionList as $line){
                             echo "<tr>";
                             $count = 0;
+                            
                             
                             foreach ($avtoLineList as $avtoline){
                                 $str = $avtoline->date;
                                 $lineImns = $imnsDAO->getImnsById($bd, $line->id_imns);
                                 $lineUser = $userDAO->getUsersById($bd, $line->id_user);
+                                
+                                $posSNC = strpos($str, "%SNC");
+                                if ($posSNC !== false){
+                                    $serial_number = $serial_number + 1;
+                                    $str = str_replace("%SNC", strval($serial_number), $str );
+                                }
                                 
                                 $posNNU = strpos($str, "%NNU");
                                 if ($posNNU !== false){
