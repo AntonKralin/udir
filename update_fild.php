@@ -65,12 +65,17 @@ if (isset($inputs['add'])){
     $date_upload = date("Y-m-d");
     $login = $requestionDAO->createNewLogin($bd, $imns->id, $id_user, $id_base);
     $count = $requestionDAO->getCountBaseUser($bd, $id_base, $id_user);
-    if ($count == 0){
-        $requestionDAO->insertFild2($bd, $id_user, $id_base, $imns->id, $login, $date_upload, $fild_state[0], $request_state[0], $number, $notice, $admins->id);
+    $requestion = $requestionDAO->getRequestionByUserBase($bd, $id_user, $id_base);
+    if ($requestion == null){  
+        if ($count == 0){
+            $requestionDAO->insertFild2($bd, $id_user, $id_base, $imns->id, $login, $date_upload, $fild_state[0], $request_state[0], $number, $notice, $admins->id);
+        }
+        //echo '<script>window.close()</script>';
+        header("Location: ".$_SESSION["HTTP_REFERER"]);
+        //exit;
     }
-    //echo '<script>window.close()</script>';
-    header("Location: ".$_SESSION["HTTP_REFERER"]);
-    //exit;
+    $userDAO = new UsersDao();
+    $user = $userDAO->getUsersById($bd, $id_user);
     
 }
 

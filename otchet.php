@@ -221,6 +221,12 @@ $bd = new BD();
                                     $str = str_replace("%UT", $lineUser->telefon, $str);
                                 }
                                 
+                                
+                                $posSTR = strpos($str, "%STR");
+                                if ($posSTR !== false){
+                                    $str = str_replace("%STR", $line->request, $str);
+                                }
+                                
                                 $posRL = strpos($str, "%RL");
                                 if ($posRL !== false){
                                     $str = str_replace("%RL", $line->login, $str);

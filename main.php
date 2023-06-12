@@ -634,8 +634,9 @@ if ($base == null){
                             }
                         ?>
                     </select>
+                    <p><h8>№ заявки: </h8><input type="text" id="number" name="number" value="" title="№ заявки" placeholder="№ заявки" style="width:83%" autofocus/>
                     <p><h8>Примечание: </h8>
-                    <p><textarea name="notice" title='Примечание' placeholder="Примечание" style="width:100%" autofocus/> </textarea></p>
+                    <p><textarea name="notice" title='Примечание' placeholder="Примечание" style="width:100%" /> </textarea></p>
                     <input type="submit" name="add" value="Добавить доступ" title="Добавить доступ">
                     <input type="submit" name="update" value="Изменить доступ" title="Изменить доступ">
                     <?php 
